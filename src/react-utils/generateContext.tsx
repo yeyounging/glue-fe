@@ -36,7 +36,7 @@ export default function generateContext<ContextType>(
       return context;
     }
     if (defaultContextValue !== null) {
-      return context;
+      return defaultContextValue;
     }
 
     const error = new Error(errorMessage);
