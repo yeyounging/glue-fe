@@ -78,7 +78,11 @@ export default function MouseImageGallery() {
   };
 
   return (
-    <section onMouseMove={manageMouseMove}>
+    <section
+      onMouseMove={manageMouseMove}
+      className="bg-[#F08D53] relative h-screen"
+    >
+      <nav className="pl-30 pt-30 w-fit">kea</nav>
       {Array.from({ length: 20 }, (_, i) => i + 1).map((__, index) => {
         // eslint-disable-next-line
         const ref = useRef(null);

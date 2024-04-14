@@ -1,10 +1,12 @@
 import MouseImageGallery from '@/components/MouseImageGallery';
+import PlayGround from '@/components/Playground';
 
 export default function Page() {
   return (
-    <main className="h-screen relative bg-[#F08D53]">
-      <nav className="pl-30 pt-30 w-fit">kea</nav>
+    <main className="relative">
       <MouseImageGallery />
+
+      <PlayGround />
     </main>
   );
 }
