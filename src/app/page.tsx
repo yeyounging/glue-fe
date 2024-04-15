@@ -1,3 +1,4 @@
+import Footer from '@/components/Common/Footer';
 import Glue from '@/components/Glue';
 import MatchCards from '@/components/MatchCards';
 import MouseImageGallery from '@/components/MouseImageGallery';
@@ -13,6 +14,8 @@ export default function Page() {
       <Glue />
 
       <MatchCards />
+
+      <Footer />
     </main>
   );
 }
