@@ -25,6 +25,7 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
+    colors: { primary: '#F08D53', transparent: 'transparent' },
     extend: {
       width: px0To500,
       height: px0To500,
@@ -35,6 +36,10 @@ const config: Config = {
       minHeight: px0To500,
       spacing: px0To500,
       borderRadius: { ...px0To100, button: 6 },
+    },
+    fontFamily: {
+      luckiest: 'var(--luckiest)',
+      pretendard: 'var(--pretendard)',
     },
   },
   plugins: [],
