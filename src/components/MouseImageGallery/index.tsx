@@ -1,7 +1,9 @@
 'use client';
 
-import { MouseEvent, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
+import { MouseEvent, useRef } from 'react';
+import { Trending, Write } from '../Common';
 
 export default function MouseImageGallery() {
   let steps = 0;
@@ -80,9 +82,22 @@ export default function MouseImageGallery() {
   return (
     <section
       onMouseMove={manageMouseMove}
-      className="bg-[#F08D53] relative h-screen"
+      className="bg-primary relative h-screen"
     >
-      <nav className="pl-30 pt-30 w-fit">kea</nav>
+      {/* FIXME: refactor */}
+      <nav className="w-full px-30 pt-30 flex justify-between">
+        <div className="flex gap-10">
+          <p className="pt-3">kea</p>
+          <Link className="z-[100]" href="/trending">
+            <Trending />
+          </Link>
+        </div>
+
+        <Link href="/write" className="flex gap-10 z-[100]">
+          <Write />
+        </Link>
+      </nav>
+
       {Array.from({ length: 20 }, (_, i) => i + 1).map((__, index) => {
         // eslint-disable-next-line
         const ref = useRef(null);

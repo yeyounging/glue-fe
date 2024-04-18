@@ -1,13 +1,7 @@
 import type { Metadata } from 'next';
 import { ReactNode } from 'react';
-import { Luckiest_Guy } from 'next/font/google';
 import './globals.css';
-
-const luckiestGuy = Luckiest_Guy({
-  subsets: ['latin'],
-  weight: ['400'],
-  display: 'swap',
-});
+import { luckiestGuy, pretendard } from './fonts';
 
 export const metadata: Metadata = {
   title: 'Glue',
@@ -21,7 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={luckiestGuy.className}>{children}</body>
+      <body className={`${luckiestGuy.variable} ${pretendard.variable}`}>
+        {children}
+      </body>
     </html>
   );
 }

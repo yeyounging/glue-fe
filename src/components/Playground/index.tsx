@@ -15,7 +15,7 @@ const STICKER_MAP = [
 export default function PlayGround() {
   return (
     <section className="h-[1185px] relative">
-      <div className="w-full h-257 bg-gradient-to-b from-[#F08D53] to-white" />
+      <div className="w-full h-257 bg-gradient-to-b from-primary to-white" />
 
       {STICKER_MAP.map(({ title, className }) => (
         <Sticker key={title} className={cn('absolute', className)}>
