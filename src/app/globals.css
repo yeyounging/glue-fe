@@ -27,3 +27,7 @@ body {
   transform: translate(-50%, -10px);
   z-index: -1;
 }
+
+.text-shadow-primary:hover {
+  filter: drop-shadow(0 0 0.75rem #f08d53);
+}
