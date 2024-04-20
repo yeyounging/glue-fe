@@ -1,16 +1,19 @@
 'use client';
 
 import { useState } from 'react';
-import { BlockNoteView, useCreateBlockNote } from '@blocknote/react';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
+import dynamic from 'next/dynamic';
 import { Button, Input, NavigationIcons } from '@/components/Common';
 import { usePortal } from '@/hooks';
+
+const Editor = dynamic(() => import('@/components/Common/Editor'), {
+  ssr: false,
+});
 
 export default function Page() {
   const port = usePortal({ id: 'write-portal-container' });
   const [title, setTitle] = useState<string>('');
-  const editor = useCreateBlockNote();
 
   return (
     <main className="relative flex justify-center">
@@ -40,11 +43,7 @@ export default function Page() {
 
         <div className="h-1 bg-[#D8D8D8] mx-45" />
 
-        <BlockNoteView
-          editor={editor}
-          className="w-full min-h-[500px] rounded-[4px] py-10 mt-42"
-          theme="light"
-        />
+        <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-42" />
       </section>
     </main>
   );

@@ -35,10 +35,7 @@ export default function useEditor(options?: EditorOptions) {
       method: 'POST',
       body,
     });
-    const result = (await ret.json()).data.url.replace(
-      'tmpfiles.org/',
-      'tmpfiles.org/dl/',
-    );
+    const result = (await ret.json()).data.url;
     return result;
   }, []);
 
