@@ -11,12 +11,14 @@
   "dependencies": {
     "@blocknote/core": "^0.12.4",
     "@blocknote/react": "^0.12.4",
+    "@radix-ui/react-avatar": "^1.0.4",
     "clsx": "^2.1.0",
     "framer-motion": "^11.0.28",
     "next": "14.1.4",
     "react": "^18",
     "react-dom": "^18",
-    "tailwind-merge": "^2.2.2"
+    "tailwind-merge": "^2.2.2",
+    "vaul": "^0.9.0"
   },
   "devDependencies": {
     "@types/node": "^20",

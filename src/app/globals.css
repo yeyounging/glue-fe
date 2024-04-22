@@ -31,3 +31,13 @@ body {
 .text-shadow-primary:hover {
   filter: drop-shadow(0 0 0.75rem #f08d53);
 }
+
+.text-overflow {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+}
