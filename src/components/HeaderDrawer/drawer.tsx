@@ -1,14 +1,18 @@
 'use client';
 
-import * as React from 'react';
 import { Drawer as DrawerPrimitive } from 'vaul';
-
 import { cn } from '@/utils';
+import {
+  forwardRef,
+  ElementRef,
+  ComponentProps,
+  ComponentPropsWithoutRef,
+} from 'react';
 
 export function Drawer({
   shouldScaleBackground = true,
   ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root>) {
+}: ComponentProps<typeof DrawerPrimitive.Root>) {
   return (
     <DrawerPrimitive.Root
       shouldScaleBackground={shouldScaleBackground}
@@ -24,9 +28,9 @@ const DrawerPortal = DrawerPrimitive.Portal;
 
 const DrawerClose = DrawerPrimitive.Close;
 
-const DrawerOverlay = React.forwardRef<
-  React.ElementRef<typeof DrawerPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
+const DrawerOverlay = forwardRef<
+  ElementRef<typeof DrawerPrimitive.Overlay>,
+  ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
@@ -36,9 +40,9 @@ const DrawerOverlay = React.forwardRef<
 ));
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
-const DrawerContent = React.forwardRef<
-  React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
+const DrawerContent = forwardRef<
+  ElementRef<typeof DrawerPrimitive.Content>,
+  ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <DrawerPortal>
     <DrawerOverlay />

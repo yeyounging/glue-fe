@@ -40,7 +40,10 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       {/* FIXME: 패딩값 수정  */}
       <input
         ref={ref}
-        className={cn('bg-transparent w-full p-5', className)}
+        className={cn(
+          'bg-transparent w-full p-5 focus:outline-none',
+          className,
+        )}
         onChange={handleChange}
         {...rest}
       />

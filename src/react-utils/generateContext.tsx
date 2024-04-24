@@ -10,12 +10,12 @@ import {
 interface ContextOptions<ContextType> {
   name: string;
   errorMessage?: string;
-  defaultContextValue?: ContextType;
+  defaultContextValue: ContextType;
 }
 
-type ProviderProps<ContextValuesType> =
-  | (ContextValuesType & { children: ReactNode })
-  | { children: ReactNode };
+type ProviderProps<ContextValuesType> = ContextValuesType & {
+  children: ReactNode;
+};
 
 export default function generateContext<ContextType>(
   options: ContextOptions<ContextType>,

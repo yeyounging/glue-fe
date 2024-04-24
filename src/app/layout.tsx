@@ -15,9 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${luckiestGuy.variable} ${pretendard.variable} text-[#2f2e2e] `}
-      >
+      <body className={`${luckiestGuy.variable} ${pretendard.variable}`}>
         {children}
       </body>
     </html>
