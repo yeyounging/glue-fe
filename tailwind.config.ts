@@ -25,7 +25,11 @@ const config: Config = {
     './src/app/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
-    colors: { primary: '#F08D53', transparent: 'transparent' },
+    colors: {
+      primary: '#F08D53',
+      transparent: 'transparent',
+      white: '#ffffff',
+    },
     extend: {
       width: px0To500,
       height: px0To500,
