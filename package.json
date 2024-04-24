@@ -21,7 +21,7 @@
     "react-konva": "^18.2.10",
     "recoil": "^0.7.7",
     "tailwind-merge": "^2.2.2",
-    "use-image": "^1.1.1"
+    "use-image": "^1.1.1",
     "vaul": "^0.9.0"
   },
   "devDependencies": {
