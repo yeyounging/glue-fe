@@ -10,7 +10,6 @@ export default function Page() {
   type ButtonOption = '내가구독' | '나를구독';
   const [selectedButton, setSelectedButton] =
     useState<ButtonOption>('내가구독');
-  
   const handleButtonClick = (buttonName: ButtonOption) => {
     setSelectedButton(buttonName);
   };
