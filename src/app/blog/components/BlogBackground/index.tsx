@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import bg from '/public/images/bg-temp.jpeg';
+import bg from '../../../../../public/images/bg-temp.jpeg';
 
 export default function BlogBackground() {
   const description = 'Just keep swimming 🏄🏿‍♂️';
