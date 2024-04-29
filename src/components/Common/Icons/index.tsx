@@ -9,4 +9,3 @@ export { default as StickerStar } from './StickerStar';
 export { default as Pencil } from './Pencil';
 export { default as Close } from './Close';
 export { default as HamburgerMenu } from './HamburgerMenu';
-export { default as Search } from './Search';
