@@ -55,11 +55,11 @@ export default function Page() {
           <div>Your Match</div>
         </h1>
 
-        <div className="w-full h-[600px] bg-[#FF5BB4] rounded-20 grid grid-cols-2 grid-rows-2 justify-items-center items-center px-50 py-20">
+        <div className="w-full h-[550px] bg-[#FF5BB4] rounded-20 grid grid-cols-2 grid-rows-2 justify-items-center items-center px-70 py-20">
           {dummyMatches.map(
             ({ id, name, description, matchRate, imageSrc }) => (
               <Link key={id} href={`/blog/${id}`}>
-                <Card width="w-200" height="h-260">
+                <Card width="w-190" height="h-247">
                   <Card.Image>
                     <Image
                       src={imageSrc}
