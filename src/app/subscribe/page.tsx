@@ -49,7 +49,7 @@ export default function Page() {
           <ProfileCard id={5} />
         </div>
       </section>
-      <p className="h-500 w-1 bg-primary mt-100 ml-230 fixed" />
+      <p className="h-500 w-1 bg-primary mt-100 ml-220 fixed" />
       <section className="flex flex-col items-start ml-380">
         <div className="flex flex-col items-center">
           <div className="font-extrabold text-4xl">Others&apos; Stories</div>
