@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { NavigationIcons } from '@/components/Common';
+import { Nav } from '@/components/Common';
 
 export const metadata: Metadata = {
   title: 'glue - my subscription',
@@ -10,12 +10,11 @@ export const metadata: Metadata = {
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <main>
-      <nav className="flex justify-between px-30 pt-30">
+      <Nav>
         <Link href="/" className="text-20 font-luckiest">
           Glue
         </Link>
-        <NavigationIcons />
-      </nav>
+      </Nav>
       {children}
     </main>
   );

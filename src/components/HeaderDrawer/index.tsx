@@ -19,12 +19,12 @@ export function HeaderDrawer({ children }: { children: ReactNode }) {
       <DrawerTrigger>{children}</DrawerTrigger>
       <DrawerContent className="w-300 h-full fixed right-0">
         <DrawerClose asChild>
-          <div className="pl-250 py-30">
+          <div className="pl-250 py-30 cursor-pointer">
             <Close />
           </div>
         </DrawerClose>
         <div className="px-60 py-50">
-          <div className="font-luckiest text-20 text-primary ">@ {name}</div>
+          <div className="font-luckiest text-20 text-primary">@ {name}</div>
           <p className="h-1 w-200 bg-[#b0aeae] mb-10" />
           <Navigator />
         </div>

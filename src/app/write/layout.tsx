@@ -1,8 +1,8 @@
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
 import Link from 'next/link';
-import { PortalContainer } from '@/components/Common';
+import { ReactNode } from 'react';
 import { RecoilProvider } from '@/lib';
+import { Nav, PortalContainer } from '@/components/Common';
 
 export const metadata: Metadata = {
   title: '글 작성',
@@ -17,13 +17,12 @@ export default function WriteLayout({
   return (
     <RecoilProvider>
       <main>
-        <nav className="flex justify-between px-30 pt-30">
+        <Nav>
           <Link href="/" className="text-20 font-luckiest">
             Glue
           </Link>
-
           <PortalContainer id="write-portal-container" />
-        </nav>
+        </Nav>
 
         {children}
       </main>

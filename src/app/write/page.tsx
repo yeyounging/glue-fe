@@ -4,6 +4,8 @@ import { useState } from 'react';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import { useSetRecoilState } from 'recoil';
 import {
   Button,
   Input,
@@ -15,8 +17,6 @@ import {
 } from '@/components/Common';
 import { usePortal } from '@/hooks';
 import { cn, generateId } from '@/utils';
-import Image from 'next/image';
-import { useSetRecoilState } from 'recoil';
 import { Ghost, Github, Smile, Star } from './dummyIcons';
 import { StickerState } from './store';
 import { ImageProps } from './components/Sticker/types';
@@ -68,7 +68,7 @@ export default function Page() {
   };
 
   return (
-    <main className="relative flex justify-center">
+    <section className="relative flex justify-center">
       {port?.(
         <div className="flex gap-20">
           <Switch
@@ -197,6 +197,6 @@ export default function Page() {
 
         <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-42" />
       </section>
-    </main>
+    </section>
   );
 }

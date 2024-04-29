@@ -1,6 +1,4 @@
 .container {
-  width: 200px;
-  height: 260px;
   border-radius: 1rem;
   transition: all 0.1s;
   position: relative;
@@ -10,16 +8,8 @@
 
 .overlay {
   position: absolute;
-  width: 200px;
-  height: 260px;
   border-radius: 1rem;
-  background: linear-gradient(
-    105deg,
-    transparent 30%,
-    rgba(255, 219, 112, 0.8) 45%,
-    rgba(132, 50, 255, 0.6) 50%,
-    transparent 75%
-  );
+
   filter: brightness(1.1) opacity(0.8);
   mix-blend-mode: color-dodge;
   background-size: 150% 150%;
@@ -29,14 +19,8 @@
 
 .darkOverlay {
   position: absolute;
-  width: 200px;
-  height: 260px;
   border-radius: 1rem;
   mix-blend-mode: hard-light;
-  background: linear-gradient(
-    150deg,
-    rgba(100, 100, 100, 1) 0%,
-    rgba(80, 80, 80, 1) 100%
-  );
+
   z-index: 3;
 }

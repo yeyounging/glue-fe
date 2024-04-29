@@ -1,19 +1,23 @@
 'use client';
 
-import { useRef, PointerEvent } from 'react';
+import { useRef, PointerEvent, ReactNode } from 'react';
 import './card.css';
 import { cn } from '@/utils';
 
 type TiltableSkillCardProps = {
-  // eslint-disable-next-line
-  data?: any;
+  children?: ReactNode;
+  width?: string;
+  height?: string;
 };
 
-export default function Card({ data }: TiltableSkillCardProps) {
+function Card({
+  width = 'w-200',
+  height = 'h-260',
+  children,
+}: TiltableSkillCardProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
   const darkOverlayRef = useRef<HTMLDivElement>(null);
-  const isSpread = !!data;
 
   const handlePointerMove = (e: PointerEvent) => {
     if (containerRef.current && overlayRef.current && darkOverlayRef.current) {
@@ -23,20 +27,9 @@ export default function Card({ data }: TiltableSkillCardProps) {
 
       containerRef.current.style.transform = `perspective(350px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
-      if (!isSpread) {
-        overlayRef.current.style.backgroundPosition = `${
-          offsetX / 5 + offsetY / 5
-        }%`;
-      }
-
-      if (isSpread) {
-        const backgroundPosX =
-          (offsetX / containerRef.current.offsetWidth) * 100;
-        const backgroundPosY =
-          (offsetY / containerRef.current.offsetHeight) * 100;
-
-        darkOverlayRef.current.style.background = `radial-gradient(circle farthest-side at ${backgroundPosX}% ${backgroundPosY}%, transparent 0%, rgba(170, 170, 170, 1) 80%, rgba(82, 82, 82, 1) 100%)`;
-      }
+      overlayRef.current.style.backgroundPosition = `${
+        offsetX / 5 + offsetY / 5
+      }%`;
 
       overlayRef.current.style.filter = 'opacity(0.8)';
     }
@@ -58,24 +51,59 @@ export default function Card({ data }: TiltableSkillCardProps) {
     <div
       ref={containerRef}
       className={cn(
-        'container bg-[white] opacity-[88%] flex justify-center',
-        isSpread && 'hover:cursor-pointer',
+        'container bg-[white] opacity-[88%] flex flex-col items-center',
+        width,
+        height,
       )}
       onPointerMove={handlePointerMove}
       onPointerOut={handlePointOut}
     >
       <div
         ref={overlayRef}
-        className="overlay"
+        className={cn('overlay', width, height)}
         style={{
-          filter: isSpread ? 'opacity(0)' : 'opacity(0.8)',
+          filter: 'opacity(0.8)',
         }}
       />
-      <p className="pt-20">Hello!</p>
       <div
         ref={darkOverlayRef}
-        className={cn('darkOverlay opacity-0', isSpread && 'opacity-90')}
+        className={cn('darkOverlay opacity-0', width, height)}
       />
+
+      {children}
     </div>
   );
 }
+
+function CardImage({ children }: { children: ReactNode }) {
+  return <div className="mt-10 relative w-100 h-100 mb-30">{children}</div>;
+}
+
+function CardTitle({ children }: { children: string }) {
+  return (
+    <h1 className="font-pretendard mb-20 text-18 font-semibold">{children}</h1>
+  );
+}
+
+function CardDescription({ children }: { children: string }) {
+  return <div className="font-pretendard text-16 mb-5">{children}</div>;
+}
+
+function CardFooter({
+  children,
+  className,
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={cn('font-luckiest text-16', className)}>{children}</div>
+  );
+}
+
+Card.Image = CardImage;
+Card.Title = CardTitle;
+Card.Description = CardDescription;
+Card.Footer = CardFooter;
+
+export default Card;
