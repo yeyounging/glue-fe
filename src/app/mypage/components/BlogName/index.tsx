@@ -19,9 +19,7 @@ export default function BlogName() {
     <section className="flex flex-col items-center pb-250 gap-100">
       <p className="text-30 font-semibold py-20">blog-info</p>
       <article className="flex flex-col">
-        <label htmlFor="title" className="text-[#747373]">
-          Title
-        </label>
+        <p className="text-[#747373]">Title</p>
         <Input
           type="text"
           id="title"
@@ -29,9 +27,7 @@ export default function BlogName() {
           onChange={handleTitleChange}
           className="border border-primary/70 p-10 rounded-md w-400 h-30"
         />
-        <label htmlFor="description" className="text-[#747373] mt-30">
-          Description
-        </label>
+        <p className="text-[#747373] mt-30">Description</p>
         <Input
           type="text"
           id="description"

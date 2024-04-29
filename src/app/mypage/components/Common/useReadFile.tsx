@@ -18,6 +18,8 @@ const useDefaultFile = (
           setFile(defaultFile);
         })
         .catch((error) => {
+          // FIXME: delte console
+          // eslint-disable-next-line no-console
           console.error(`Error fetching ${fileName} image:`, error);
         });
     }

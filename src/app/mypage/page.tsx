@@ -1,4 +1,4 @@
-import Profile from './components/profile';
+import Profile from './components/Profile';
 import Title from './components/Title';
 import Background from './components/Background';
 import BlogName from './components/BlogName';
