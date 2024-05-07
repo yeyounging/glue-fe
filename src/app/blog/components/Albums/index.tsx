@@ -1,8 +1,9 @@
 import Image from 'next/image';
+import { range } from '@/utils';
 
 export default function Albums() {
   const imageCount = 5;
-  const images = Array.from({ length: imageCount }, (_, index) => index + 1);
+  const images = range(0, imageCount);
 
   return (
     <article className="flex flex-col px-100 items-start">
