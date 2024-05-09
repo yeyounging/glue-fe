@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { RecoilProvider } from '@/lib';
+import { RecoilProvider } from '@/app/lib';
 import { Nav, PortalContainer } from '@/components/Common';
 
 export const metadata: Metadata = {
