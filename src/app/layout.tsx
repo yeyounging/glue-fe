@@ -19,9 +19,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body className={`${luckiestGuy.variable} ${pretendard.variable}`}>
-        <GlobalErrorBoundary
-          renderFallback={() => <div>로딩이 발생했어요 !</div>}
-        >
+        <GlobalErrorBoundary fallback={<div>에러가 발생했어요 !</div>}>
           <Suspense fallback={<div>로딩 중입니다...</div>}>
             <QueryProviders>
               <ToastProvider>{children}</ToastProvider>

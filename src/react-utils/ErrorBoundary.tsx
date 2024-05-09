@@ -1,3 +1,5 @@
+'use client';
+
 import {
   Component,
   ComponentPropsWithoutRef,
@@ -21,9 +23,11 @@ type RenderFallbackType = <ErrorType extends Error>(
   props: RenderFallbackProps<ErrorType>,
 ) => ReactNode;
 
+type FallbackType = ReactNode;
+
 type ErrorBoundaryProps<ErrorType extends Error = Error> = {
   onReset?(): void;
-  renderFallback: RenderFallbackType;
+  fallback: RenderFallbackType | FallbackType;
   onError?(error: ErrorType, info: ErrorInfo): void;
   resetKeys?: unknown[];
 };
@@ -92,13 +96,16 @@ class ErrorBoundary extends Component<
 
   render() {
     const { error } = this.state;
-    const { children, renderFallback } = this.props;
+    const { children, fallback } = this.props;
 
     if (error != null) {
-      return renderFallback({
-        error,
-        reset: this.resetErrorBoundary,
-      });
+      if (typeof fallback === 'function') {
+        return fallback({
+          error,
+          reset: this.resetErrorBoundary,
+        });
+      }
+      return fallback;
     }
     return children;
   }
