@@ -40,7 +40,6 @@ const dummyImages = Array.from({ length: 12 }).reduce(
 
 export default function Page() {
   const [title, setTitle] = useState<string>('');
-  const [showStickers, setShowStickers] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number>(0);
   const [editable, setEditable] = useState<boolean>(true);
   const port = usePortal({ id: 'write-portal-container' });
@@ -97,24 +96,22 @@ export default function Page() {
       <aside
         className={cn(
           'w-300 h-[577px] rounded-16 px-23 py-20 absolute top-85 left-30 transition-all duration-200',
-          showStickers && 'shadow-background',
-          !editable && 'z-[210000001]',
+          !editable && 'z-[210000001] shadow-background',
         )}
       >
         <div className="flex justify-between">
           <Button
             onClick={() => {
               setEditable((prev) => !prev);
-              setShowStickers((prev) => !prev);
             }}
             className="select-none text-[26px] bg-transparent font-luckiest !text-primary text-shadow-primary transition-all duration-200"
           >
             stickers
           </Button>
 
-          {showStickers && (
+          {!editable && (
             <Button
-              onClick={() => setShowStickers(() => false)}
+              onClick={() => setEditable(() => true)}
               className="bg-transparent"
             >
               <StickerClose />
@@ -123,7 +120,7 @@ export default function Page() {
         </div>
 
         {/* TODO: 검색 기능 구현 */}
-        {showStickers && (
+        {!editable && (
           <Input
             wrapperClassName="w-full mt-17"
             className="rounded-12 border-1 border-[#D8D8D8] px-17 placeholder:text-[#999]"
@@ -131,7 +128,7 @@ export default function Page() {
           />
         )}
 
-        {showStickers && (
+        {!editable && (
           <section className="mt-60">
             <div>
               <div className="flex gap-2 px-20 mb-6">
@@ -168,8 +165,7 @@ export default function Page() {
                       x: 300,
                       y: 300,
                     });
-                    setShowStickers(() => false);
-                    setEditable(() => false);
+                    setEditable(() => true);
                   }}
                 />
               ))}
