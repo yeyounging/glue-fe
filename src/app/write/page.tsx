@@ -1,11 +1,10 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+import Image from 'next/image';
 import { useState } from 'react';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
-import dynamic from 'next/dynamic';
-import Image from 'next/image';
-import { useSetRecoilState } from 'recoil';
 import {
   Button,
   Input,
@@ -18,7 +17,7 @@ import {
 import { usePortal } from '@/hooks';
 import { cn, generateId } from '@/utils';
 import { Ghost, Github, Smile, Star } from './dummyIcons';
-import { StickerState } from './store';
+import { useRecoilStickerState } from './store';
 import { ImageProps } from './components/Sticker/types';
 
 const Konva = dynamic(() => import('./components/Konva'), { ssr: false });
@@ -40,12 +39,12 @@ const dummyImages = Array.from({ length: 12 }).reduce(
 );
 
 export default function Page() {
-  const port = usePortal({ id: 'write-portal-container' });
   const [title, setTitle] = useState<string>('');
   const [showStickers, setShowStickers] = useState<boolean>(false);
   const [selectedId, setSelectedId] = useState<number>(0);
   const [editable, setEditable] = useState<boolean>(true);
-  const setRenderedStickers = useSetRecoilState(StickerState);
+  const port = usePortal({ id: 'write-portal-container' });
+  const { setStickerStates } = useRecoilStickerState();
 
   const addStickerToPanel = ({
     src,
@@ -54,7 +53,7 @@ export default function Page() {
     x,
     y,
   }: Omit<ImageProps, 'resetButtonRef' | 'id'>) => {
-    setRenderedStickers((currentImages) => [
+    setStickerStates((currentImages) => [
       ...currentImages,
       {
         id: generateId(),
@@ -73,7 +72,7 @@ export default function Page() {
         <div className="flex gap-20">
           <Switch
             checked={editable}
-            handleChange={() => setEditable(!editable)}
+            handleChange={() => setEditable((prev) => !prev)}
             LeftIcon={
               <StickerStar className="w-13 h-13 absolute top-[4.5px] left-5 z-10" />
             }
@@ -105,12 +104,8 @@ export default function Page() {
         <div className="flex justify-between">
           <Button
             onClick={() => {
-              if (editable) {
-                setEditable(false);
-              } else {
-                setEditable(true);
-              }
-              setShowStickers(!showStickers);
+              setEditable((prev) => !prev);
+              setShowStickers((prev) => !prev);
             }}
             className="select-none text-[26px] bg-transparent font-luckiest !text-primary text-shadow-primary transition-all duration-200"
           >
@@ -119,7 +114,7 @@ export default function Page() {
 
           {showStickers && (
             <Button
-              onClick={() => setShowStickers(false)}
+              onClick={() => setShowStickers(() => false)}
               className="bg-transparent"
             >
               <StickerClose />
@@ -127,6 +122,7 @@ export default function Page() {
           )}
         </div>
 
+        {/* TODO: 검색 기능 구현 */}
         {showStickers && (
           <Input
             wrapperClassName="w-full mt-17"
@@ -172,8 +168,8 @@ export default function Page() {
                       x: 300,
                       y: 300,
                     });
-                    setShowStickers(false);
-                    setEditable(false);
+                    setShowStickers(() => false);
+                    setEditable(() => false);
                   }}
                 />
               ))}

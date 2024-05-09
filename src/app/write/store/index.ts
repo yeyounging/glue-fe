@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, useRecoilState } from 'recoil';
 import { ImageProps } from '../components/Sticker/types';
 
 export const STICKER_KEY = 'renderedStickers';
@@ -8,3 +8,8 @@ export const StickerState = atom<ImageProps[]>({
   key: STICKER_KEY,
   default: [],
 });
+
+export const useRecoilStickerState = () => {
+  const [stickerStates, setStickerStates] = useRecoilState(StickerState);
+  return { stickerStates, setStickerStates };
+};
