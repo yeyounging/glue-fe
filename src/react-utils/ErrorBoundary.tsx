@@ -3,13 +3,13 @@ import {
   ComponentPropsWithoutRef,
   ErrorInfo,
   forwardRef,
-  PropsWithChildren,
   PropsWithRef,
   ReactNode,
   useImperativeHandle,
   useRef,
   useState,
 } from 'react';
+import { StrictPropsWithChildren } from '@/types';
 import { isDifferentArray } from '@/utils';
 
 type RenderFallbackProps<ErrorType extends Error = Error> = {
@@ -38,13 +38,15 @@ const initialState: State = {
 
 class ErrorBoundary extends Component<
   // ErrorBoundaryProps
-  PropsWithRef<PropsWithChildren<ErrorBoundaryProps>>,
+  PropsWithRef<StrictPropsWithChildren<ErrorBoundaryProps>>,
   // ErrorBoundaryState
   State
 > {
   hasError = false;
 
-  constructor(props: PropsWithRef<PropsWithChildren<ErrorBoundaryProps>>) {
+  constructor(
+    props: PropsWithRef<StrictPropsWithChildren<ErrorBoundaryProps>>,
+  ) {
     super(props);
     this.state = initialState;
   }
