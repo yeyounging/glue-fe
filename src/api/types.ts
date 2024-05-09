@@ -1,5 +1,6 @@
 export interface BaseResponse<T> {
-  code: number;
+  isSuccess: boolean;
+  code: string;
   message: string;
-  data: T;
+  result: T;
 }
