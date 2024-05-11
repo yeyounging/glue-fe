@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEvent, useRef } from 'react';
+import { range } from '@/utils';
 import { Trending, Write } from '../Common';
 
 export default function MouseImageGallery() {
@@ -98,7 +99,7 @@ export default function MouseImageGallery() {
         </Link>
       </nav>
 
-      {Array.from({ length: 20 }, (_, i) => i + 1).map((__, index) => {
+      {range(0, 20).map((__, index) => {
         // eslint-disable-next-line
         const ref = useRef(null);
         refs.push(ref);
