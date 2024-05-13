@@ -27,7 +27,7 @@ type FallbackType = ReactNode;
 
 type ErrorBoundaryProps<ErrorType extends Error = Error> = {
   onReset?(): void;
-  fallback: RenderFallbackType | FallbackType;
+  renderFallback: RenderFallbackType | FallbackType;
   onError?(error: ErrorType, info: ErrorInfo): void;
   resetKeys?: unknown[];
 };
@@ -40,7 +40,7 @@ const initialState: State = {
   error: null,
 };
 
-class ErrorBoundary extends Component<
+export class ErrorBoundary extends Component<
   // ErrorBoundaryProps
   PropsWithRef<StrictPropsWithChildren<ErrorBoundaryProps>>,
   // ErrorBoundaryState
@@ -96,16 +96,16 @@ class ErrorBoundary extends Component<
 
   render() {
     const { error } = this.state;
-    const { children, fallback } = this.props;
+    const { children, renderFallback } = this.props;
 
-    if (error != null) {
-      if (typeof fallback === 'function') {
-        return fallback({
+    if (error !== null) {
+      if (typeof renderFallback === 'function') {
+        return renderFallback({
           error,
           reset: this.resetErrorBoundary,
         });
       }
-      return fallback;
+      return renderFallback;
     }
     return children;
   }
