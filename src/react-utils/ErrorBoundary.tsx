@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { StrictPropsWithChildren } from '@/types';
 import { isDifferentArray } from '@/utils';
+import { ErrorboundaryProvider } from './ErrorboundaryContext';
 
 type RenderFallbackProps<ErrorType extends Error = Error> = {
   error: ErrorType;
@@ -98,16 +99,22 @@ export class ErrorBoundary extends Component<
     const { error } = this.state;
     const { children, renderFallback } = this.props;
 
-    if (error !== null) {
-      if (typeof renderFallback === 'function') {
-        return renderFallback({
-          error,
-          reset: this.resetErrorBoundary,
-        });
-      }
-      return renderFallback;
-    }
-    return children;
+    const fallback =
+      typeof renderFallback === 'function'
+        ? renderFallback({
+            error: error as Error,
+            reset: this.resetErrorBoundary,
+          })
+        : renderFallback;
+
+    return (
+      <ErrorboundaryProvider
+        error={error}
+        resetErrorBoundary={this.resetErrorBoundary}
+      >
+        {error !== null ? fallback : children}
+      </ErrorboundaryProvider>
+    );
   }
 }
 
