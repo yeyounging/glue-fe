@@ -35,7 +35,7 @@ export default function WriteLayout({
         <PortalContainer id="post-detail" />
       </Nav>
 
-      <AsyncBoundaryWithQuery>
+      <AsyncBoundaryWithQuery pendingFallback={<div>loding 중..</div>}>
         <PostDetailFallback>
           <PostDetailFetcher id={postId}>{children}</PostDetailFetcher>
         </PostDetailFallback>
