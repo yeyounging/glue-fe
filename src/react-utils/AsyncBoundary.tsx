@@ -1,3 +1,5 @@
+'use client';
+
 import { ComponentProps, ComponentRef, Suspense, forwardRef } from 'react';
 import { StrictPropsWithChildren } from '@/types';
 import { useQueryErrorResetBoundary } from '@tanstack/react-query';
@@ -13,8 +15,8 @@ type SuspenseProps = Omit<ComponentProps<typeof Suspense>, 'fallback'>;
 type AsyncBoundrayProps = StrictPropsWithChildren &
   ErrorBoundaryProps &
   SuspenseProps & {
-    errorFallback: ComponentProps<typeof ErrorBoundary>['renderFallback'];
-    pendingFallback: ComponentProps<typeof Suspense>['fallback'];
+    errorFallback?: ComponentProps<typeof ErrorBoundary>['renderFallback'];
+    pendingFallback?: ComponentProps<typeof Suspense>['fallback'];
   };
 
 export const AsyncBoundary = forwardRef<
