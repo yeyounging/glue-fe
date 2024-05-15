@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error: AxiosError) => {
-    return error;
+    throw error;
   },
 );
 
@@ -37,10 +37,10 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response.data,
   async (error: AxiosError) => {
     if (!error.response) {
-      return Promise.reject(error);
+      throw error;
     }
     // TODO: 에러 세분화
-    return error;
+    throw error;
   },
 );
 
