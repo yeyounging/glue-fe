@@ -11,7 +11,7 @@ import { ACCESS_TOKEN, HTTP_METHODS } from '@/constants';
 import { BaseResponse } from './types';
 
 const axiosInstance: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_URL,
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   timeout: 10000,
   headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
@@ -29,7 +29,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error: AxiosError) => {
-    return error;
+    throw error;
   },
 );
 
@@ -37,10 +37,10 @@ axiosInstance.interceptors.response.use(
   (response: AxiosResponse) => response.data,
   async (error: AxiosError) => {
     if (!error.response) {
-      return Promise.reject(error);
+      throw error;
     }
     // TODO: 에러 세분화
-    return error;
+    throw error;
   },
 );
 

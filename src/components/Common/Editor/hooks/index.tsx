@@ -8,7 +8,7 @@ import { safeSeesionStorage } from '@/utils';
 import { LOADING, EDITOR_KEY } from '../constants';
 
 interface EditorOptions {
-  initialData: PartialBlock[];
+  initialData?: PartialBlock[];
 }
 
 export default function useEditor(options?: EditorOptions) {

@@ -13,6 +13,7 @@ import {
 } from 'react';
 import { StrictPropsWithChildren } from '@/types';
 import { isDifferentArray } from '@/utils';
+import { ErrorboundaryProvider } from './ErrorboundaryContext';
 
 type RenderFallbackProps<ErrorType extends Error = Error> = {
   error: ErrorType;
@@ -27,7 +28,7 @@ type FallbackType = ReactNode;
 
 type ErrorBoundaryProps<ErrorType extends Error = Error> = {
   onReset?(): void;
-  fallback: RenderFallbackType | FallbackType;
+  renderFallback: RenderFallbackType | FallbackType;
   onError?(error: ErrorType, info: ErrorInfo): void;
   resetKeys?: unknown[];
 };
@@ -40,7 +41,7 @@ const initialState: State = {
   error: null,
 };
 
-class ErrorBoundary extends Component<
+export class ErrorBoundary extends Component<
   // ErrorBoundaryProps
   PropsWithRef<StrictPropsWithChildren<ErrorBoundaryProps>>,
   // ErrorBoundaryState
@@ -63,7 +64,7 @@ class ErrorBoundary extends Component<
     const { error } = this.state;
     const { resetKeys } = this.props;
 
-    if (error == null) {
+    if (error === null) {
       return;
     }
     if (!this.hasError) {
@@ -94,20 +95,36 @@ class ErrorBoundary extends Component<
     this.setState(initialState);
   }
 
+  genereateRenderedChildren() {
+    const { error } = this.state;
+    const { children, renderFallback } = this.props;
+
+    if (error === null) {
+      return children;
+    }
+
+    return typeof renderFallback === 'function'
+      ? renderFallback({
+          error: error as Error,
+          reset: this.resetErrorBoundary,
+        })
+      : renderFallback;
+  }
+
   render() {
     const { error } = this.state;
-    const { children, fallback } = this.props;
 
-    if (error != null) {
-      if (typeof fallback === 'function') {
-        return fallback({
-          error,
-          reset: this.resetErrorBoundary,
-        });
-      }
-      return fallback;
-    }
-    return children;
+    const renderedChildren = this.genereateRenderedChildren();
+    const ErrorboundaryProviderProps = {
+      error,
+      resetErrorBoundary: this.resetErrorBoundary,
+    };
+
+    return (
+      <ErrorboundaryProvider {...ErrorboundaryProviderProps}>
+        {renderedChildren}
+      </ErrorboundaryProvider>
+    );
   }
 }
 
