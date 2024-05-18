@@ -8,6 +8,9 @@ const getQueryClient = cache(
         queries: {
           retry: false,
         },
+        mutations: {
+          retry: false,
+        },
       },
     }),
 );
