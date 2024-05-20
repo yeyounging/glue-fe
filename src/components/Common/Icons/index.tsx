@@ -10,3 +10,4 @@ export { default as Close } from './Close';
 export { default as HamburgerMenu } from './HamburgerMenu';
 export { default as Search } from './Search';
 export { default as Copy } from './Copy';
+export { default as KakaoLoginIcon } from './KakaoLoginIcon';
