@@ -1,4 +1,5 @@
 import { http } from '@/api';
+import { PostDetailResponse } from './types';
 
-export const getPostDetail = <PostDetailResponse>(id: number) =>
-  http.get<PostDetailResponse>({ url: `/post/${id}` });
+export const getPostDetail = (id: number) =>
+  http.get<PostDetailResponse>({ url: `/posts/${id}` });
