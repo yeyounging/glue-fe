@@ -4,7 +4,7 @@ import { Nav } from '@/components/Common';
 
 export const metadata: Metadata = {
   title: '로그인',
-  description: 'Glue - myblog',
+  description: 'Glue, The Blog Playground!',
 };
 
 export default function LoginLayout({
