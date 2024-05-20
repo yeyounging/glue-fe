@@ -15,10 +15,13 @@ import {
   Switch,
 } from '@/components/Common';
 import { usePortal } from '@/hooks';
-import { cn, generateId } from '@/utils';
+import { cn, generateId, safeSeesionStorage } from '@/utils';
+import { EDITOR_KEY } from '@/components/Common/Editor/constants';
+import { useToastContext } from '@/components/Common/Toast/ToastProvider';
 import { Ghost, Github, Smile, Star } from './dummyIcons';
 import { useRecoilStickerState } from './store';
 import { ImageProps } from './components/Sticker/types';
+import { usePost } from './api/queries';
 
 const Konva = dynamic(() => import('./components/Konva'), { ssr: false });
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
@@ -42,8 +45,13 @@ export default function Page() {
   const [title, setTitle] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number>(0);
   const [editable, setEditable] = useState<boolean>(true);
+
   const port = usePortal({ id: 'write-portal-container' });
   const { setStickerStates } = useRecoilStickerState();
+  const { handleError } = useToastContext()!;
+
+  // TODO: blogId 사용
+  const { mutate } = usePost(8);
 
   const addStickerToPanel = ({
     src,
@@ -63,6 +71,30 @@ export default function Page() {
         src,
       },
     ]);
+  };
+
+  // TODO: refactor
+  const handleSubmitPost = (publishState: 'publish' | 'save' = 'save') => {
+    const content = safeSeesionStorage.get(EDITOR_KEY) || '';
+
+    if (!content) {
+      handleError('내용을 입력해주세요', { duration: 2000 });
+      return;
+    }
+
+    if (!title) {
+      handleError('제목을 입력해주세요', { duration: 2000 });
+      return;
+    }
+
+    // TODO: blogId
+    mutate({
+      blogId: 10,
+      title,
+      content,
+      temporaryState: publishState === 'publish',
+      categoryName: '',
+    });
   };
 
   return (
@@ -87,8 +119,18 @@ export default function Page() {
 
           <div className="flex gap-12 font-pretendard font-medium">
             {/* TODO: 글 업로드 */}
-            <Button className="bg-[#E3E3E3] w-60 h-30">저장</Button>
-            <Button className="bg-primary text-[white] w-60 h-30">발행</Button>
+            <Button
+              className="bg-[#E3E3E3] w-60 h-30"
+              onClick={() => handleSubmitPost()}
+            >
+              저장
+            </Button>
+            <Button
+              className="bg-primary text-[white] w-60 h-30"
+              onClick={() => handleSubmitPost('publish')}
+            >
+              발행
+            </Button>
           </div>
         </div>,
       )}
