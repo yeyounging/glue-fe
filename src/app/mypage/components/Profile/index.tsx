@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, ChangeEvent } from 'react';
+import { useState } from 'react';
 import { Input } from '@/components/Common';
 import { getProfileImageById } from '@/app/lib/dummyData';
 import { FileEdit, FileThumbnails, useReadFile } from '../Common';
@@ -12,10 +12,6 @@ export default function Profile() {
     'image/png',
   );
   const [name, setName] = useState('');
-
-  const handleNameChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.target.value);
-  };
 
   return (
     <section className="flex flex-col items-center justify-center pb-250 gap-100">
@@ -34,7 +30,7 @@ export default function Profile() {
             id="name"
             type="text"
             value={name}
-            onChange={handleNameChange}
+            onValueChange={setName}
             className="border border-primary/70 p-10 rounded-md w-250 h-30"
           />
         </div>
