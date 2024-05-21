@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { Nav, PortalContainer, Trending } from '@/components/Common';
+import { Nav, NavigationIcons, Trending } from '@/components/Common';
 import { AsyncBoundaryWithQuery } from '@/react-utils';
 import PostDetailFetcher from './components/PostDetailFetcher';
 import PostDetailFallback from './components/PostDetailFallback';
@@ -32,12 +32,16 @@ export default function WriteLayout({
           </Link>
         </div>
 
-        <PortalContainer id="post-detail" />
+        <NavigationIcons />
       </Nav>
 
       <AsyncBoundaryWithQuery pendingFallback={<div>loding 중..</div>}>
         <PostDetailFallback>
-          <PostDetailFetcher id={postId}>{children}</PostDetailFetcher>
+          <PostDetailFetcher id={postId}>
+            <section className="flex justify-center">
+              <section className="w-[620px]">{children}</section>
+            </section>
+          </PostDetailFetcher>
         </PostDetailFallback>
       </AsyncBoundaryWithQuery>
     </main>
