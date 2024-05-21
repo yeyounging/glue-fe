@@ -29,14 +29,21 @@ export default function ToastProvider({ children }: { children: ReactNode }) {
 
   const handleError = useCallback(
     (toastComponent: StrictToastRenderable, options?: ToastOptions) => {
-      toast.error(toastComponent, { position: 'bottom-center', ...options });
+      setToastId(
+        toast.error(toastComponent, { position: 'bottom-center', ...options }),
+      );
     },
     [],
   );
 
   const handleSuccess = useCallback(
     (toastComponent: StrictToastRenderable, options?: ToastOptions) => {
-      toast.success(toastComponent, { position: 'bottom-center', ...options });
+      setToastId(
+        toast.success(toastComponent, {
+          position: 'bottom-center',
+          ...options,
+        }),
+      );
     },
     [],
   );
