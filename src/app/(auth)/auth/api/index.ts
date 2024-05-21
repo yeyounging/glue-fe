@@ -6,7 +6,7 @@ export interface LoginResponse {
 }
 
 export const postLogin = ({ code }: { code: string }) =>
-  http.get<LoginResponse>({
+  http.post<LoginResponse>({
     url: '/auths/login',
     params: { code },
   });
