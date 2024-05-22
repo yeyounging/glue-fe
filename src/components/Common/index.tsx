@@ -8,3 +8,5 @@ export { default as Editor } from './Editor';
 export { default as Switch } from './Switch';
 export { default as Nav } from './Nav';
 export { default as ToastProvider } from './Toast';
+export { default as TextArea } from './TextArea';
+export { default as Pagination } from './Pagination';
