@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
 import Link from 'next/link';
-import { Nav, PortalContainer } from '@/components/Common';
+import { ReactNode } from 'react';
+import { Nav, NavigationIcons } from '@/components/Common';
 
 export const metadata: Metadata = {
   title: '매치',
@@ -19,7 +19,10 @@ export default function MatchLayout({
         <Link href="/" className="text-20 font-luckiest">
           Glue
         </Link>
-        <PortalContainer id="match-portal-container" />
+
+        <div className="flex gap-20">
+          <NavigationIcons />
+        </div>
       </Nav>
 
       {children}

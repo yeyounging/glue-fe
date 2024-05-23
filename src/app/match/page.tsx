@@ -1,7 +1,3 @@
-'use client';
-
-import { usePortal } from '@/hooks';
-import { NavigationIcons } from '@/components/Common';
 import Card from '@/components/MatchCards/Card';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -39,16 +35,8 @@ const dummyMatches = [
 ] as const;
 
 export default function Page() {
-  const port = usePortal({ id: 'match-portal-container' });
-
   return (
     <section className="w-full relative">
-      {port?.(
-        <div className="flex gap-20">
-          <NavigationIcons />
-        </div>,
-      )}
-
       <section className="absolute-center w-[550px] top-50 flex flex-col gap-20">
         <h1 className="font-luckiest text-60 text-center leading-[1.1]">
           <div className="text-[#FF5BB4]">Catch</div>
