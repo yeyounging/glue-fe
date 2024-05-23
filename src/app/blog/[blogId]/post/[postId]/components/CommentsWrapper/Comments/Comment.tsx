@@ -3,9 +3,11 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Button } from '@/components/Common';
+import { AsyncBoundaryWithQuery } from '@/react-utils';
 import CommentAdder from '../CommentAdder';
 import { Comment as CommentProp } from '../api/types';
-import ChildComments from './ChildComments';
+import ChildComments from './ChildComments/ChildComments';
+import ChildCommentFallback from './ChildComments/ChildCommentsFallback';
 
 export default function Comment(commentItem: CommentProp & { postId: number }) {
   const {
@@ -57,7 +59,11 @@ export default function Comment(commentItem: CommentProp & { postId: number }) {
       </div>
       <div className="text-14">{content}</div>
 
-      {showChildComments && <ChildComments commentId={commentId} />}
+      <AsyncBoundaryWithQuery pendingFallback={<div>대댓글 로딩중</div>}>
+        <ChildCommentFallback>
+          {showChildComments && <ChildComments commentId={commentId} />}
+        </ChildCommentFallback>
+      </AsyncBoundaryWithQuery>
 
       {showCommentAdder && (
         <div className="pl-30">

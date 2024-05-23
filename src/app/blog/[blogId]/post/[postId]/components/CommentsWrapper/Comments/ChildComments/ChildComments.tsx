@@ -3,7 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { Pagination } from '@/components/Common';
-import { useChildComments } from '../api/quries';
+import { useChildComments } from '../../api/quries';
 
 export default function ChildComments({ commentId }: { commentId: number }) {
   const [page, setPage] = useState<number>(1);

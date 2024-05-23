@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import { Button, LikeIcon } from '@/components/Common';
+import { AsyncBoundaryWithQuery } from '@/react-utils';
 import useLike from './hooks';
 import CommentAdder from './CommentAdder';
 import Comments from './Comments';
+import CommentsFallback from './Comments/CommentFallback';
 
 export default function CommentsWrapper({ postId }: { postId: string }) {
   const { handleLike, likeCount, like } = useLike(Number(postId));
@@ -26,7 +28,11 @@ export default function CommentsWrapper({ postId }: { postId: string }) {
         </motion.div>
       </div>
 
-      <Comments postId={Number(postId)} />
+      <AsyncBoundaryWithQuery pendingFallback={<div>댓글 로딩중...</div>}>
+        <CommentsFallback>
+          <Comments postId={Number(postId)} />
+        </CommentsFallback>
+      </AsyncBoundaryWithQuery>
 
       <CommentAdder postId={Number(postId)} />
     </div>
