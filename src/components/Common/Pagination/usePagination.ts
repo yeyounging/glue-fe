@@ -1,14 +1,15 @@
 'use client';
 
-import { As } from '@/types';
-import { cn } from '@/utils';
 import {
   Dispatch,
   HTMLAttributes,
   SetStateAction,
   useCallback,
   useMemo,
+  ReactNode,
 } from 'react';
+import { As } from '@/types';
+import { cn } from '@/utils';
 
 export interface UsePaginationProp extends HTMLAttributes<HTMLDivElement> {
   total: number;
@@ -18,10 +19,22 @@ export interface UsePaginationProp extends HTMLAttributes<HTMLDivElement> {
   as?: As;
   onNext?: () => void;
   onPrev?: () => void;
+  prevButton?: ReactNode;
+  nextButton?: ReactNode;
 }
 
 export function usePagination({ ...props }: UsePaginationProp) {
-  const { page, setPage, total, onNext, onPrev, as, ...otherProps } = props;
+  const {
+    page,
+    setPage,
+    total,
+    onNext,
+    onPrev,
+    as,
+    prevButton,
+    nextButton,
+    ...otherProps
+  } = props;
 
   const pageSize = 10;
   const Component = as || 'div';
@@ -100,6 +113,8 @@ export function usePagination({ ...props }: UsePaginationProp) {
     page,
     setPage,
     displayedPages,
+    prevButton,
+    nextButton,
     getBaseProps,
     getPrevButtonProps,
     getNextButtonProps,

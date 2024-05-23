@@ -1,44 +1,40 @@
 'use client';
 
-import { ReactNode } from 'react';
-import { UsePaginationProp, usePagination } from './usePagination';
 import Button from '../Button';
 import { PaginationLeft, PaginationRight } from '../Icons';
+import { UsePaginationProp, usePagination } from './usePagination';
 import { PaginationProvider, usePaginationContext } from './PaginationContext';
 
 function PrevButton() {
-  const { getPrevButtonProps } = usePaginationContext()!;
+  const { prevButton, getPrevButtonProps } = usePaginationContext()!;
 
   return (
     <Button {...getPrevButtonProps()}>
-      <PaginationLeft />
+      {prevButton && <PaginationLeft />}
     </Button>
   );
 }
 
 function NextButton() {
-  const { getNextButtonProps } = usePaginationContext()!;
+  const { nextButton, getNextButtonProps } = usePaginationContext()!;
 
   return (
     <Button {...getNextButtonProps()}>
-      <PaginationRight />
+      {nextButton && <PaginationRight />}
     </Button>
   );
 }
 
 function PaginationContent() {
   const { displayedPages, getPageButtonProps } = usePaginationContext()!;
+  const pages = displayedPages.length > 0 ? displayedPages : [1];
 
   return (
     <>
       <PrevButton />
-      {(displayedPages.length > 0 ? displayedPages : [1]).map((pageNumber) => (
-        <button
-          type="button"
-          key={pageNumber}
-          {...getPageButtonProps(pageNumber)}
-        >
-          {pageNumber}
+      {pages.map((page) => (
+        <button type="button" key={page} {...getPageButtonProps(page)}>
+          {page}
         </button>
       ))}
       <NextButton />
@@ -46,14 +42,7 @@ function PaginationContent() {
   );
 }
 
-function Pagination({
-  prevButton,
-  nextButton,
-  ...props
-}: UsePaginationProp & {
-  prevButton?: ReactNode;
-  nextButton?: ReactNode;
-}) {
+function Pagination({ ...props }: UsePaginationProp) {
   const { Component, getBaseProps, ...values } = usePagination({
     ...props,
   });
