@@ -1,17 +1,19 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import '@blocknote/core/fonts/inter.css';
-import '@blocknote/react/style.css';
 import { Button, LikeIcon } from '@/components/Common';
+import { AsyncBoundaryWithQuery } from '@/react-utils';
 import useLike from './hooks';
+import CommentAdder from './CommentAdder';
+import Comments from './Comments';
+import CommentsFallback from './Comments/CommentFallback';
 
-export default function Comments({ postId }: { postId: string }) {
+export default function CommentsWrapper({ postId }: { postId: string }) {
   const { handleLike, likeCount, like } = useLike(Number(postId));
 
   return (
     <div className="w-[530px] mt-130 mb-[30vh] mx-auto">
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center pb-13 border-b-1 border-[#E0E0E0]">
         <p className="flex items-center text-33 font-bold">댓글</p>
 
         <motion.div whileTap={{ scale: 0.9 }}>
@@ -25,6 +27,14 @@ export default function Comments({ postId }: { postId: string }) {
           </Button>
         </motion.div>
       </div>
+
+      <AsyncBoundaryWithQuery pendingFallback={<div>댓글 로딩중...</div>}>
+        <CommentsFallback>
+          <Comments postId={Number(postId)} />
+        </CommentsFallback>
+      </AsyncBoundaryWithQuery>
+
+      <CommentAdder postId={Number(postId)} />
     </div>
   );
 }

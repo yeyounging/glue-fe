@@ -1,8 +1,8 @@
 'use client';
 
 import { useRef, PointerEvent, ReactNode } from 'react';
-import './card.css';
 import { cn } from '@/utils';
+import './card.css';
 
 type TiltableSkillCardProps = {
   children?: ReactNode;

@@ -12,3 +12,5 @@ export { default as Search } from './Search';
 export { default as Copy } from './Copy';
 export { default as KakaoLoginIcon } from './KakaoLoginIcon';
 export { default as LikeIcon } from './LikeIcon';
+export { default as PaginationLeft } from './PaginationLeft';
+export { default as PaginationRight } from './PaginationRight';

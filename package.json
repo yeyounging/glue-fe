@@ -25,6 +25,7 @@
     "react-dom": "^18",
     "react-hot-toast": "^2.4.1",
     "react-konva": "^18.2.10",
+    "react-textarea-autosize": "^8.5.3",
     "recoil": "^0.7.7",
     "tailwind-merge": "^2.2.2",
     "use-image": "^1.1.1",

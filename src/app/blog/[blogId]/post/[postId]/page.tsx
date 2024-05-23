@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import { usePostDetailContext } from './components/PostDetailFetcher/PostDetailContext';
-import Comments from './components/Comments';
+import CommentsWrapper from './components/CommentsWrapper';
 import PostDetailHeader from './components/PostDetailHeader';
 
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
@@ -24,7 +24,7 @@ export default function Page({
 
       <Editor editable={false} initialData={content} />
 
-      <Comments postId={postId} />
+      <CommentsWrapper postId={postId} />
     </>
   );
 }
