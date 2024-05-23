@@ -1,6 +1,8 @@
-import Card from '@/components/MatchCards/Card';
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
+import Card from '@/components/MatchCards/Card';
 
 // FIXME: 더미 데이터 삭제
 const dummyMatches = [
