@@ -10,7 +10,7 @@ function PrevButton() {
 
   return (
     <Button {...getPrevButtonProps()}>
-      {prevButton && <PaginationLeft />}
+      {prevButton || <PaginationLeft />}
     </Button>
   );
 }
@@ -20,7 +20,7 @@ function NextButton() {
 
   return (
     <Button {...getNextButtonProps()}>
-      {nextButton && <PaginationRight />}
+      {nextButton || <PaginationRight />}
     </Button>
   );
 }
