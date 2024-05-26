@@ -46,7 +46,7 @@ export function useDropdown({ ...props }: UseDropdownProps) {
   const getBaseProps = useCallback(
     () => ({
       ref: domRef,
-      className: cn('relative', classNames?.base),
+      className: cn('relative w-200 h-50', classNames?.base),
     }),
     [domRef, classNames?.base],
   );

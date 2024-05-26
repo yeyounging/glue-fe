@@ -7,6 +7,7 @@ import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import {
   Button,
+  Dropdown,
   Input,
   NavigationIcons,
   Pencil,
@@ -41,10 +42,18 @@ const dummyImages = Array.from({ length: 12 }).reduce(
   [],
 );
 
+const CATEGORIES = [
+  { title: '운동' },
+  { title: '일상' },
+  { title: '맛집' },
+  { title: '여행' },
+] as const;
+
 export default function Page() {
   const [title, setTitle] = useState<string>('');
   const [selectedId, setSelectedId] = useState<number>(0);
   const [editable, setEditable] = useState<boolean>(true);
+  const [category, setCategory] = useState<string>('카테고리 선택');
 
   const port = usePortal({ id: 'write-portal-container' });
   const { setStickerStates } = useRecoilStickerState();
@@ -93,7 +102,7 @@ export default function Page() {
       title,
       content,
       temporaryState: publishState === 'publish',
-      categoryName: '',
+      categoryName: category,
     });
   };
 
@@ -229,7 +238,38 @@ export default function Page() {
 
         <div className="h-1 bg-[#D8D8D8] mx-45" />
 
-        <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-42" />
+        <div className="flex justify-end">
+          <Dropdown
+            onChange={setCategory}
+            classNames={{
+              base: 'mt-10 mr-45',
+              menu: 'top-60 shadow-[0px_4px_14px_0px_rgba(0,0,0,0.10)] rounded-8',
+            }}
+          >
+            <Dropdown.Trigger className="bg-white w-full rounded-8 h-50 border-1 border-[#EBEBEB]">
+              {category}
+            </Dropdown.Trigger>
+
+            <Dropdown.Menu>
+              {CATEGORIES.map(({ title: categoryTitle }, index) => (
+                <>
+                  <Dropdown.Item
+                    key={categoryTitle}
+                    value={categoryTitle}
+                    className="h-44 bg-white"
+                  >
+                    {categoryTitle}
+                  </Dropdown.Item>
+                  {index < CATEGORIES.length - 1 && (
+                    <div className="w-full h-1 bg-[#EBEBEB]" />
+                  )}
+                </>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+
+        <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-10" />
       </section>
     </section>
   );
