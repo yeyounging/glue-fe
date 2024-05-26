@@ -17,6 +17,7 @@
     "@tanstack/react-query": "^5.35.1",
     "axios": "^1.6.8",
     "clsx": "^2.1.0",
+    "dayjs": "^1.11.11",
     "framer-motion": "^11.1.7",
     "js-cookie": "^3.0.5",
     "konva": "^9.3.6",
