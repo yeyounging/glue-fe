@@ -9,7 +9,9 @@ export default function Comments({ postId }: { postId: number }) {
   const [page, setPage] = useState<number>(1);
 
   const {
-    data: { commentItems, total },
+    data: {
+      commentItemList: { totalPage, commentItems },
+    },
   } = useComments(postId, page);
 
   return (
@@ -21,7 +23,7 @@ export default function Comments({ postId }: { postId: number }) {
       <Pagination
         page={page}
         setPage={setPage}
-        total={total}
+        total={totalPage}
         className="flex justify-end py-9 gap-8"
       />
     </>

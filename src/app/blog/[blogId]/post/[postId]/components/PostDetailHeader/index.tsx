@@ -7,7 +7,9 @@ import { usePostDetailContext } from '../PostDetailFetcher/PostDetailContext';
 import useFollow from './hooks';
 
 export default function PostDetailHeader({ postId }: { postId: string }) {
-  const { title, createdAt } = usePostDetailContext()!;
+  const {
+    postDetail: { title, createdAt },
+  } = usePostDetailContext()!;
   const { follow, handleFollow } = useFollow(Number(postId));
   const name = '김성민';
 
