@@ -6,6 +6,7 @@ import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import {
   Button,
+  Close,
   Dropdown,
   Input,
   NavigationIcons,
@@ -15,7 +16,7 @@ import {
 } from '@/components/Common';
 import { usePortal } from '@/hooks';
 import StickerPannel from './components/StickerPannel';
-import { useWritePost } from './hooks';
+import { useHashtags, useWritePost } from './hooks';
 
 const Konva = dynamic(() => import('./components/Konva'), { ssr: false });
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
@@ -30,12 +31,13 @@ const CATEGORIES = [
 ] as const;
 
 export default function Page() {
-  const [title, setTitle] = useState<string>('');
   const [editable, setEditable] = useState<boolean>(true);
-  const [category, setCategory] = useState<string>('카테고리 선택');
-
+  const { getInputProps, handleDelete, hashtags } = useHashtags();
   const port = usePortal({ id: 'write-portal-container' });
   const { handleSubmitPost } = useWritePost();
+
+  const [title, setTitle] = useState<string>('');
+  const [categoryName, setCategoryName] = useState<string>('카테고리 선택');
 
   return (
     <section className="relative flex justify-center">
@@ -61,13 +63,15 @@ export default function Page() {
             {/* TODO: 글 업로드 */}
             <Button
               className="bg-[#E3E3E3] w-60 h-30"
-              onClick={() => handleSubmitPost(title)}
+              onClick={() => handleSubmitPost({ title, categoryName })}
             >
               저장
             </Button>
             <Button
               className="bg-primary text-[white] w-60 h-30"
-              onClick={() => handleSubmitPost(title, 'publish')}
+              onClick={() =>
+                handleSubmitPost({ title, categoryName }, 'publish')
+              }
             >
               발행
             </Button>
@@ -92,14 +96,14 @@ export default function Page() {
 
         <div className="flex justify-end">
           <Dropdown
-            onChange={setCategory}
+            onChange={setCategoryName}
             classNames={{
               base: 'mt-10 mr-45',
               menu: 'top-60 shadow-[0px_4px_14px_0px_rgba(0,0,0,0.10)] rounded-8',
             }}
           >
             <Dropdown.Trigger className="bg-white w-full rounded-8 h-50 border-1 border-[#EBEBEB]">
-              {category}
+              {categoryName}
             </Dropdown.Trigger>
 
             <Dropdown.Menu>
@@ -122,6 +126,23 @@ export default function Page() {
         </div>
 
         <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-10" />
+
+        <div className="flex items-center mx-45">
+          <div>
+            {hashtags.map((hashtag, index) => (
+              // eslint-disable-next-line
+              <span key={index} className="mr-2">
+                #{hashtag}
+                {/* eslint-disable-next-line jsx-a11y/control-has-associated-label */}
+                <button type="button" onClick={() => handleDelete(index)}>
+                  <Close className="ml-3 mt-1 h-12" />
+                </button>
+              </span>
+            ))}
+          </div>
+
+          {hashtags.length <= 3 && <Input {...getInputProps()} />}
+        </div>
       </section>
     </section>
   );
