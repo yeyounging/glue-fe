@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Dispatch, SetStateAction, useCallback, useState } from 'react';
 import { Button, Input, StickerClose, StickerStar } from '@/components/Common';
 import { cn } from '@/utils';
-import { Ghost, Github, Smile, Star } from '../../dummyIcons';
+import { Ghost, Github, Smile, Star } from '../../constants/dummyIcons';
 import useStickerPannel from './hooks/useStickerPannel';
 import { useGenerateSticker } from './api/quries';
 import { PostGenerateStickerResponse } from './api';

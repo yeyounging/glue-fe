@@ -15,20 +15,14 @@ import {
   Switch,
 } from '@/components/Common';
 import { usePortal } from '@/hooks';
-import StickerPannel from './components/StickerPannel';
-import { useHashtags, useWritePost } from './hooks';
+import StickerPannel from '../../components/StickerPannel';
+import { useHashtags, useWritePost } from '../../hooks';
+import { CATEGORIES } from '../../constants';
 
-const Konva = dynamic(() => import('./components/Konva'), { ssr: false });
+const Konva = dynamic(() => import('../../components/Konva'), { ssr: false });
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
   ssr: false,
 });
-
-const CATEGORIES = [
-  { title: '운동' },
-  { title: '일상' },
-  { title: '맛집' },
-  { title: '여행' },
-] as const;
 
 export default function Page() {
   const [editable, setEditable] = useState<boolean>(true);
