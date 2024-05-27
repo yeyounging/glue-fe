@@ -16,13 +16,13 @@ export default function Page({
 }: {
   params: { postId: string };
 }) {
-  const { content } = usePostDetailContext()!;
+  const { postDetail } = usePostDetailContext()!;
 
   return (
     <>
       <PostDetailHeader postId={postId} />
 
-      <Editor editable={false} initialData={content} />
+      <Editor editable={false} initialData={postDetail.content} />
 
       <CommentsWrapper postId={postId} />
     </>

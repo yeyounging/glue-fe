@@ -9,7 +9,7 @@ import Comments from './Comments';
 import CommentsFallback from './Comments/CommentFallback';
 
 export default function CommentsWrapper({ postId }: { postId: string }) {
-  const { handleLike, likeCount, like } = useLike(Number(postId));
+  const { handleLike, likeCount, like = 0 } = useLike(Number(postId));
 
   return (
     <div className="w-[530px] mt-130 mb-[30vh] mx-auto">

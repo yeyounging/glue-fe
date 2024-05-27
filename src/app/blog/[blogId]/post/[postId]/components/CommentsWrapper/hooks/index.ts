@@ -8,7 +8,9 @@ import { usePostLike } from '../api/quries';
 
 export default function useLike(postId: number) {
   const [like, setLike] = useState<boolean>(false);
-  const { likeCount } = usePostDetailContext()!;
+  const {
+    postDetail: { likeCount },
+  } = usePostDetailContext()!;
   const { mutate: postLike } = usePostLike();
 
   const handleLike = useCallback(() => {

@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
-import { Nav } from '@/components/Common';
+import { Nav, NavigationIcons } from '@/components/Common';
 
 export const metadata: Metadata = {
   title: 'glue - my subscription',
@@ -14,6 +14,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <Link href="/" className="text-20 font-luckiest">
           Glue
         </Link>
+        <NavigationIcons />
       </Nav>
       {children}
     </main>

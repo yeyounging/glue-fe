@@ -3,11 +3,14 @@
 import { motion } from 'framer-motion';
 import { Button, Copy, Input } from '@/components/Common';
 
+import { formatDate } from '@/utils';
 import { usePostDetailContext } from '../PostDetailFetcher/PostDetailContext';
 import useFollow from './hooks';
 
 export default function PostDetailHeader({ postId }: { postId: string }) {
-  const { title, createdAt } = usePostDetailContext()!;
+  const {
+    postDetail: { title, createdAt },
+  } = usePostDetailContext()!;
   const { follow, handleFollow } = useFollow(Number(postId));
   const name = '김성민';
 
@@ -26,7 +29,7 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
           <div className="w-30 h-30 rounded-full bg-primary" />
 
           <p>{name}</p>
-          <p className="text-[#BABABA]">{createdAt}</p>
+          <p className="text-[#BABABA]">{formatDate(createdAt)}</p>
         </div>
 
         <div className="flex gap-10 items-center">
