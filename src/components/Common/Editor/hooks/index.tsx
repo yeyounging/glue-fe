@@ -5,7 +5,7 @@ import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import { safeSeesionStorage } from '@/utils';
-import { EDITOR_KEY } from '../constants';
+import { EDITOR_KEY, LOADING } from '../constants';
 
 interface EditorOptions {
   initialData?: PartialBlock[];
@@ -13,7 +13,7 @@ interface EditorOptions {
 
 export default function useEditor(options?: EditorOptions) {
   const [initialContent, setInitialContent] = useState<
-    PartialBlock[] | undefined
+    PartialBlock[] | undefined | typeof LOADING
   >(options?.initialData);
 
   const safeSessionStorage = useMemo(() => safeSeesionStorage, []);
@@ -40,7 +40,7 @@ export default function useEditor(options?: EditorOptions) {
   }, []);
 
   const editor = useMemo(() => {
-    if (!initialContent) {
+    if (initialContent === LOADING) {
       return undefined;
     }
     return BlockNoteEditor.create({ initialContent, uploadFile });
