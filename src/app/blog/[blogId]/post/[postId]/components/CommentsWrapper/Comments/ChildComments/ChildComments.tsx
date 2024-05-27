@@ -9,7 +9,9 @@ export default function ChildComments({ commentId }: { commentId: number }) {
   const [page, setPage] = useState<number>(1);
 
   const {
-    data: { commentItems, total },
+    data: {
+      commentItemList: { commentItems, totalPage },
+    },
   } = useChildComments(commentId, page);
 
   return (
@@ -48,7 +50,7 @@ export default function ChildComments({ commentId }: { commentId: number }) {
         <Pagination
           page={page}
           setPage={setPage}
-          total={total}
+          total={totalPage}
           className="flex justify-end py-9 gap-8"
         />
       )}

@@ -12,9 +12,14 @@ export interface Comment {
 }
 
 export interface CommentsResponse {
-  hasNext: boolean;
-  isFirst: boolean;
-  isLast: boolean;
-  commentItems: Comment[];
-  total: number;
+  loginMemberId: number;
+
+  commentItemList: {
+    hasNext: boolean;
+    isFirst: boolean;
+    isLast: boolean;
+    commentItems: Comment[];
+
+    totalPage: number;
+  };
 }
