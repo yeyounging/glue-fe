@@ -15,6 +15,8 @@ export interface PostDetailResponse {
     blogId: number;
     isLike: boolean;
     isSubscribe: boolean;
+    categoryName: string;
+    hashtags: string[];
   };
 
   loginMemberId: number;
