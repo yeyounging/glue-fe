@@ -21,7 +21,7 @@ export default function WriteLayout({
           <Link href="/" className="text-20 font-luckiest">
             Glue
           </Link>
-          <PortalContainer id="write-portal-container" />
+          <PortalContainer id="publish-container" />
         </Nav>
 
         {children}

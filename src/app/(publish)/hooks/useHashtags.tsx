@@ -3,12 +3,12 @@
 import { KeyboardEvent, useState, CompositionEvent, useCallback } from 'react';
 
 export default function useHashtags({
-  initialData,
+  initialData = [],
 }: {
   initialData?: string[];
 }) {
   const [value, setValue] = useState<string>('');
-  const [hashtags, setHashtags] = useState<string[]>(initialData ?? []);
+  const [hashtags, setHashtags] = useState<string[]>(initialData);
   const [isComposing, setIsComposing] = useState<boolean>(false);
 
   const handleComposition = useCallback(

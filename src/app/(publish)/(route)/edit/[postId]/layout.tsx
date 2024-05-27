@@ -27,7 +27,7 @@ export default function EditLayout({
             Glue
           </Link>
 
-          <PortalContainer id="edit-container" />
+          <PortalContainer id="publish-container" />
         </Nav>
 
         <AsyncBoundaryWithQuery pendingFallback={<div>loding 중..</div>}>
