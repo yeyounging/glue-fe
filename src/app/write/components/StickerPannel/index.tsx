@@ -43,7 +43,7 @@ export default function StickerPannel({
     mutate(imageString, {
       onSuccess: ({ result }) => {
         setImageString('');
-        setImageUrls((prev) => [...prev, result]);
+        setImageUrls((prev) => [result, ...prev]);
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
