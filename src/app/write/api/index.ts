@@ -9,5 +9,6 @@ export interface BlogPostRequest {
   hashtags?: string[];
   photoUrls?: string[];
 }
+
 export const postBlogPost = ({ blogId, ...post }: BlogPostRequest) =>
   http.post({ url: `/posts/${blogId}`, data: post });
