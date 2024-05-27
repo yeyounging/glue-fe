@@ -11,6 +11,11 @@ const nextConfig = {
         hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
         port: '',
       },
+      {
+        protocol: 'https',
+        hostname: process.env.NEXT_PUBLIC_STICKER_URL,
+        port: '',
+      },
     ],
   },
 };

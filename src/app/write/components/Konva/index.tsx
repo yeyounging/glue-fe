@@ -2,17 +2,16 @@
 
 import { useState } from 'react';
 import { Layer, Stage } from 'react-konva';
-import { useRecoilValue } from 'recoil';
 import { cn } from '@/utils';
 import { Sticker } from '../Sticker';
-import { StickerState } from '../../store';
+import { useRecoilStickerState } from '../../store';
 
 interface KonvaProps {
   enable: boolean;
 }
 
 export default function Konva({ enable = false }: KonvaProps) {
-  const renderedStickers = useRecoilValue(StickerState);
+  const { stickerStates } = useRecoilStickerState();
   const [selectedId, selectShape] = useState<number | null>(null);
 
   return (
@@ -28,7 +27,7 @@ export default function Konva({ enable = false }: KonvaProps) {
         }}
       >
         <Layer>
-          {renderedStickers.map((image) => (
+          {stickerStates.map((image) => (
             <Sticker
               onDragEnd={(event) => ({
                 ...image,
