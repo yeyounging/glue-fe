@@ -1,9 +1,9 @@
 'use client';
 
-import { generateId } from '@/utils';
 import { useCallback, useState } from 'react';
-import { useRecoilStickerState } from '../../store';
-import { ImageProps } from '../Sticker/types';
+import { generateId } from '@/utils';
+import { useRecoilStickerState } from '../../../store';
+import { ImageProps } from '../../Sticker/types';
 
 export default function useStickerPannel() {
   const { setStickerStates } = useRecoilStickerState();
