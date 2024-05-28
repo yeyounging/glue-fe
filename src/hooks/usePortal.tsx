@@ -9,7 +9,7 @@ export default function usePortal({ id }: { id: string }) {
   const [container, setContainer] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (isSSR) {
+    if (!isSSR) {
       setContainer(document.getElementById(id));
     }
   }, [id, isSSR]);

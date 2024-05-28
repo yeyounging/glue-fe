@@ -2,14 +2,21 @@
 
 import { KeyboardEvent, useState, CompositionEvent, useCallback } from 'react';
 
-export default function useHashtags() {
+export default function useHashtags({
+  initialData = [],
+}: {
+  initialData?: string[];
+}) {
   const [value, setValue] = useState<string>('');
-  const [hashtags, setHashtags] = useState<string[]>([]);
+  const [hashtags, setHashtags] = useState<string[]>(initialData);
   const [isComposing, setIsComposing] = useState<boolean>(false);
 
-  const handleComposition = (e: CompositionEvent<HTMLInputElement>) => {
-    setIsComposing(e.type !== 'compositionend');
-  };
+  const handleComposition = useCallback(
+    (e: CompositionEvent<HTMLInputElement>) => {
+      setIsComposing(e.type !== 'compositionend');
+    },
+    [],
+  );
 
   const addHashtag = useCallback(() => {
     setHashtags((prevHashtags) => [...prevHashtags, value.trim()]);
@@ -39,7 +46,7 @@ export default function useHashtags() {
       onCompositionEnd: handleComposition,
       placeholder: '해시태그를 입력하세요.',
     }),
-    [handleKeyDown, value],
+    [handleKeyDown, value, handleComposition],
   );
 
   return {

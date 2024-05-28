@@ -32,7 +32,17 @@ export default function WriteLayout({
           </Link>
         </div>
 
-        <NavigationIcons />
+        <div className="flex gap-10">
+          <NavigationIcons />
+
+          {/* TODO: 자신과 같은 경우 수정 버튼 추가 */}
+          <Link
+            href={`/edit/${postId}`}
+            className="w-60 h-30 rounded-6 bg-primary text-[14px] text-[white] flex items-center gap-10 justify-center"
+          >
+            수정
+          </Link>
+        </div>
       </Nav>
 
       <AsyncBoundaryWithQuery pendingFallback={<div>loding 중..</div>}>

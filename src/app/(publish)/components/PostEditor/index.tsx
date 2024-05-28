@@ -15,29 +15,41 @@ import {
   Switch,
 } from '@/components/Common';
 import { usePortal } from '@/hooks';
-import StickerPannel from './components/StickerPannel';
-import { useHashtags, useWritePost } from './hooks';
+import { PostDetailResponse } from '@/app/blog/[blogId]/post/[postId]/components/PostDetailFetcher/types';
+import StickerPannel from '../StickerPannel';
+import { useHashtags, useWritePost } from '../../hooks';
+import { CATEGORIES } from '../../constants';
 
-const Konva = dynamic(() => import('./components/Konva'), { ssr: false });
+const Konva = dynamic(() => import('../Konva'), {
+  ssr: false,
+});
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
   ssr: false,
 });
 
-const CATEGORIES = [
-  { title: '운동' },
-  { title: '일상' },
-  { title: '맛집' },
-  { title: '여행' },
-] as const;
+interface PostEditorProp {
+  postDetail?: Partial<PostDetailResponse['postDetail']>;
+}
 
-export default function Page() {
+export default function PostEditor({ postDetail = {} }: PostEditorProp) {
+  const {
+    title = '',
+    categoryName = '카테고리 선택',
+    content,
+    hashtags: initialData = [],
+  } = postDetail;
+
+  const port = usePortal({ id: 'publish-container' });
+
   const [editable, setEditable] = useState<boolean>(true);
-  const { getInputProps, handleDelete, hashtags } = useHashtags();
-  const port = usePortal({ id: 'write-portal-container' });
-  const { handleSubmitPost } = useWritePost();
+  const [editedTitle, setEditedTitle] = useState<string>(title);
+  const [editedCateogryName, setEditedCategoryName] =
+    useState<string>(categoryName);
 
-  const [title, setTitle] = useState<string>('');
-  const [categoryName, setCategoryName] = useState<string>('카테고리 선택');
+  const { getInputProps, handleDelete, hashtags } = useHashtags({
+    initialData,
+  });
+  const { handleSubmitPost } = useWritePost();
 
   return (
     <section className="relative flex justify-center">
@@ -63,14 +75,22 @@ export default function Page() {
             {/* TODO: 글 업로드 */}
             <Button
               className="bg-[#E3E3E3] w-60 h-30"
-              onClick={() => handleSubmitPost({ title, categoryName })}
+              onClick={() =>
+                handleSubmitPost({
+                  title: editedTitle,
+                  categoryName: editedCateogryName,
+                })
+              }
             >
               저장
             </Button>
             <Button
               className="bg-primary text-[white] w-60 h-30"
               onClick={() =>
-                handleSubmitPost({ title, categoryName }, 'publish')
+                handleSubmitPost(
+                  { title: editedTitle, categoryName: editedCateogryName },
+                  'publish',
+                )
               }
             >
               발행
@@ -89,21 +109,21 @@ export default function Page() {
           className="outline-none placeholder:text-[#999] text-36"
           placeholder="제목을 입력해주세요."
           value={title}
-          onValueChange={setTitle}
+          onValueChange={setEditedTitle}
         />
 
         <div className="h-1 bg-[#D8D8D8] mx-45" />
 
         <div className="flex justify-end">
           <Dropdown
-            onChange={setCategoryName}
+            onChange={setEditedCategoryName}
             classNames={{
               base: 'mt-10 mr-45',
               menu: 'top-60 shadow-[0px_4px_14px_0px_rgba(0,0,0,0.10)] rounded-8',
             }}
           >
             <Dropdown.Trigger className="bg-white w-full rounded-8 h-50 border-1 border-[#EBEBEB]">
-              {categoryName}
+              {editedCateogryName}
             </Dropdown.Trigger>
 
             <Dropdown.Menu>
@@ -125,9 +145,12 @@ export default function Page() {
           </Dropdown>
         </div>
 
-        <Editor className="w-full min-h-[500px] rounded-[4px] py-10 mt-10" />
+        <Editor
+          className="w-full min-h-[500px] rounded-[4px] py-10 mt-10"
+          initialData={content}
+        />
 
-        <div className="flex items-center mx-45">
+        <div className="flex items-center mx-45 border-t-1 border-[#EBEBEB]">
           <div>
             {hashtags.map((hashtag, index) => (
               // eslint-disable-next-line
