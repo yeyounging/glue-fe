@@ -1,7 +1,12 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
-import { Nav, NavigationIcons, Trending } from '@/components/Common';
+import {
+  Nav,
+  NavigationIcons,
+  PortalContainer,
+  Trending,
+} from '@/components/Common';
 import { AsyncBoundaryWithQuery } from '@/react-utils';
 import PostDetailFetcher from './components/PostDetailFetcher';
 import PostDetailFallback from './components/PostDetailFallback';
@@ -35,13 +40,7 @@ export default function WriteLayout({
         <div className="flex gap-10">
           <NavigationIcons />
 
-          {/* TODO: 자신과 같은 경우 수정 버튼 추가 */}
-          <Link
-            href={`/edit/${postId}`}
-            className="w-60 h-30 rounded-6 bg-primary text-[14px] text-[white] flex items-center gap-10 justify-center"
-          >
-            수정
-          </Link>
+          <PortalContainer id="edit-container" />
         </div>
       </Nav>
 
