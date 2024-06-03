@@ -7,5 +7,9 @@ import { useRecommendation } from './quries';
 export default function MatchingFetcher({ children }: StrictPropsWithChildren) {
   const { data } = useRecommendation();
 
-  return <RecommendationProvider {...data}>{children}</RecommendationProvider>;
+  return (
+    <RecommendationProvider recommendations={data}>
+      {children}
+    </RecommendationProvider>
+  );
 }

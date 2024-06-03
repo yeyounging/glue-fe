@@ -4,6 +4,6 @@ import { generateContext } from '@/react-utils';
 import { RecommendationResponse } from './api';
 
 export const [RecommendationProvider, useRecommendationContext] =
-  generateContext<RecommendationResponse[]>({
+  generateContext<{ recommendations: RecommendationResponse[] }>({
     name: 'matching-context',
   });

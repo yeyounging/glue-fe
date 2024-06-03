@@ -1,11 +1,13 @@
 import { http } from '@/api';
 
 export interface RecommendationResponse {
-  id: number;
+  blogId: number;
   profile: string;
   title: string;
   description: string;
 }
 
 export const getRecommendation = () =>
-  http.get<RecommendationResponse[]>({ url: '/blogs/recommendations' });
+  http.post<RecommendationResponse[]>({
+    url: '/blogs/recommendations',
+  });
