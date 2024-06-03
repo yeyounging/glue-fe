@@ -11,7 +11,7 @@ export default function FeedContent({
   currentPage,
   onPageChange,
 }: FeedContentProps) {
-  const { blogPostPreviews, isFirst, isLast } = useFollowPostContext()!;
+  const { blogPostPreviews, isFirst, isLast } = useFollowPostContext();
 
   return (
     <div>

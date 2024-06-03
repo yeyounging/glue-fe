@@ -10,7 +10,7 @@ export default function useLike(postId: number) {
   const [like, setLike] = useState<boolean>(false);
   const {
     postDetail: { likeCount },
-  } = usePostDetailContext()!;
+  } = usePostDetailContext();
   const { mutate: postLike } = usePostLike();
 
   const handleLike = useCallback(() => {

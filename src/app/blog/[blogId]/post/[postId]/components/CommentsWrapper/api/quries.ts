@@ -3,7 +3,7 @@ import { useToastContext } from '@/components/Common/Toast/ToastProvider';
 import { getComments, postComment, postLike, getChildComments } from '.';
 
 export const usePostLike = () => {
-  const { handleSuccess } = useToastContext()!;
+  const { handleSuccess } = useToastContext();
 
   return useMutation({
     mutationKey: ['post-like'],
@@ -23,7 +23,7 @@ export const useComments = (postId: number, page: number) =>
   });
 
 export const usePostComment = (postId: number) => {
-  const { handleSuccess } = useToastContext()!;
+  const { handleSuccess } = useToastContext();
 
   return useMutation({
     mutationKey: ['post-comment', postId],

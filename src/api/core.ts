@@ -19,7 +19,7 @@ const axiosInstance: AxiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   async (config: InternalAxiosRequestConfig) => {
-    const accessToken = Cookies.get(ACCESS_TOKEN)!;
+    const accessToken = Cookies.get(ACCESS_TOKEN) as string;
 
     if (!accessToken) {
       return config;

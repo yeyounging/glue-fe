@@ -2,6 +2,9 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import { ReactNode } from 'react';
 import { Nav, NavigationIcons } from '@/components/Common';
+import { AsyncBoundaryWithQuery } from '@/react-utils';
+import MatchingFetcher from './components/RecommendationFetcher';
+import RecommendationFallback from './components/RecommendationFallback';
 
 export const metadata: Metadata = {
   title: '매치',
@@ -25,7 +28,11 @@ export default function MatchLayout({
         </div>
       </Nav>
 
-      {children}
+      <AsyncBoundaryWithQuery>
+        <RecommendationFallback>
+          <MatchingFetcher>{children}</MatchingFetcher>
+        </RecommendationFallback>
+      </AsyncBoundaryWithQuery>
     </main>
   );
 }

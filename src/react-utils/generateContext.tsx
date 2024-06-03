@@ -23,7 +23,7 @@ export default function generateContext<ContextType>(
   const {
     name,
     errorMessage = `useContext: ${name}Context가 존재하지 않습니다. Provider를 설정해주세요.`,
-    defaultContextValue,
+    defaultContextValue = null,
   } = options;
   const Context = createContext<ContextType | null>(
     defaultContextValue ?? null,

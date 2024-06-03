@@ -7,7 +7,7 @@ import { StrictPropsWithChildren } from '@/types';
 export default function PostDetailFallback({
   children,
 }: StrictPropsWithChildren) {
-  const { error, resetErrorBoundary } = useErrorBoundaryContext()!;
+  const { error, resetErrorBoundary } = useErrorBoundaryContext();
 
   if (error !== null) {
     // TODO: 변경

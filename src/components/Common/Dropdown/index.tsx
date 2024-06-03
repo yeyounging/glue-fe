@@ -30,7 +30,7 @@ function Trigger({
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onClick'>) {
   const {
     context: { onOpenChange },
-  } = useDropdownContext()!;
+  } = useDropdownContext();
 
   return (
     <Button {...props} onClick={() => onOpenChange()}>
@@ -40,7 +40,7 @@ function Trigger({
 }
 
 function Menu({ children }: StrictPropsWithChildren) {
-  const { context, getMenuProps } = useDropdownContext()!;
+  const { context, getMenuProps } = useDropdownContext();
   const { isOpen } = context;
   const dropdownAnimations: AnimationProps = useMemo(
     () => ({
@@ -65,7 +65,7 @@ function Item({
   ...props
 }: StrictPropsWithChildren &
   Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onChange'>) {
-  const { getItemButtonProps } = useDropdownContext()!;
+  const { getItemButtonProps } = useDropdownContext();
 
   return (
     <Button

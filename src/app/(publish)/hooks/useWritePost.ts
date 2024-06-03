@@ -8,7 +8,7 @@ import { usePost } from '../api/queries';
 import { BlogPostRequest } from '../api';
 
 export default function useWritePost() {
-  const { handleError } = useToastContext()!;
+  const { handleError } = useToastContext();
   // TODO: blogId 사용
   const { mutate } = usePost(8);
 

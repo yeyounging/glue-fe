@@ -7,7 +7,7 @@ import { postBlogPost, BlogPostRequest } from '.';
 export const usePost = (id: number) => {
   const { push } = useRouter();
   const { handleSuccess, handleError, handleLoading, toastId } =
-    useToastContext()!;
+    useToastContext();
 
   return useMutation({
     mutationKey: ['post', id],
