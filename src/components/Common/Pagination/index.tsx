@@ -6,7 +6,7 @@ import { UsePaginationProp, usePagination } from './usePagination';
 import { PaginationProvider, usePaginationContext } from './PaginationContext';
 
 function PrevButton() {
-  const { prevButton, getPrevButtonProps } = usePaginationContext()!;
+  const { prevButton, getPrevButtonProps } = usePaginationContext();
 
   return (
     <Button {...getPrevButtonProps()}>
@@ -16,7 +16,7 @@ function PrevButton() {
 }
 
 function NextButton() {
-  const { nextButton, getNextButtonProps } = usePaginationContext()!;
+  const { nextButton, getNextButtonProps } = usePaginationContext();
 
   return (
     <Button {...getNextButtonProps()}>
@@ -26,7 +26,7 @@ function NextButton() {
 }
 
 function PaginationContent() {
-  const { displayedPages, getPageButtonProps } = usePaginationContext()!;
+  const { displayedPages, getPageButtonProps } = usePaginationContext();
   const pages = displayedPages.length > 0 ? displayedPages : [1];
 
   return (

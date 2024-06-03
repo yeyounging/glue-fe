@@ -14,7 +14,7 @@ export default function FollowerListContent({
   currentPage,
   onPageChange,
 }: FollowerListContentProps) {
-  const { blogItems, isFirst, isLast } = useFollowerListContext()!;
+  const { blogItems, isFirst, isLast } = useFollowerListContext();
 
   return (
     <div className="flex flex-col justify-center">

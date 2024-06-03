@@ -16,7 +16,7 @@ type AsyncBoundrayProps = StrictPropsWithChildren &
   ErrorBoundaryProps &
   SuspenseProps & {
     errorFallback?: ComponentProps<typeof ErrorBoundary>['renderFallback'];
-    pendingFallback: ComponentProps<typeof Suspense>['fallback'];
+    pendingFallback?: ComponentProps<typeof Suspense>['fallback'];
   };
 
 export const AsyncBoundary = forwardRef<

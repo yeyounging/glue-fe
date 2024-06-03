@@ -4,7 +4,7 @@ import { usePostDetailContext } from '@/app/blog/[blogId]/post/[postId]/componen
 import PostEditor from '@/app/(publish)/components/PostEditor';
 
 export default function Page() {
-  const postDetail = usePostDetailContext()!;
+  const postDetail = usePostDetailContext();
 
   return <PostEditor {...postDetail} />;
 }

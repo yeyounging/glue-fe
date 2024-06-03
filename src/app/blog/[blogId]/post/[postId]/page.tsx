@@ -16,7 +16,7 @@ export default function Page({
 }: {
   params: { postId: string };
 }) {
-  const { postDetail } = usePostDetailContext()!;
+  const { postDetail } = usePostDetailContext();
 
   return (
     <>

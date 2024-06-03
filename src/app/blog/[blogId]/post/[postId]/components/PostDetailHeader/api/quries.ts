@@ -3,7 +3,7 @@ import { useToastContext } from '@/components/Common/Toast/ToastProvider';
 import { postFollow, deletePosting } from '.';
 
 export const usePostFollow = () => {
-  const { handleSuccess } = useToastContext()!;
+  const { handleSuccess } = useToastContext();
 
   return useMutation({
     mutationKey: ['post-follow'],
@@ -16,7 +16,7 @@ export const usePostFollow = () => {
 };
 
 export const useDeletePosting = () => {
-  const { handleSuccess } = useToastContext()!;
+  const { handleSuccess } = useToastContext();
 
   return useMutation({
     mutationKey: ['delete-posting'],

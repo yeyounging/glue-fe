@@ -13,7 +13,7 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
   const {
     postDetail: { title, createdAt, memberId },
     loginMemberId,
-  } = usePostDetailContext()!;
+  } = usePostDetailContext();
   const { follow, handleFollow } = useFollow(Number(postId));
   const name = '김성민';
   const port = usePortal({ id: 'edit-container' });
