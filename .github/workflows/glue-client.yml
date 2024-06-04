@@ -15,6 +15,9 @@ jobs:
         run: |
           echo "${{ toJson(secrets) }}" | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > .env
 
+      - name: env 파일이 존재하는지 확인중..
+        run: cat .env
+
       - name: 액션 스테이터스를 체크중...
         uses: actions/checkout@v3
 
@@ -44,13 +47,17 @@ jobs:
           username: ${{ secrets.ACCESS_ID }}
           password: ${{ secrets.ACCESS_SECRET }}
 
-      - name: 도커 이미지 빌드 및 푸시중..
+      - name: 카카오 클라우드에 빌드 및 푸시중..
         uses: docker/build-push-action@v4
         with:
           file: Dockerfile
           context: .
           push: true
           tags: ${{ secrets.GLUE_PROJECT }}/glue-repository/glue-client:${{ github.sha }}
+          build-args:
+            - NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            - NEXT_PUBLIC_LOGIN_URL=${{ secrets.NEXT_PUBLIC_LOGIN_URL }}
+            - NEXT_PUBLIC_MASTER_TOKEN=${{ secrets.NEXT_PUBLIC_MASTER_TOKEN }}
 
   update-manifest-state:
     runs-on: ubuntu-latest

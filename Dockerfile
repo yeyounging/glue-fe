@@ -5,6 +5,13 @@ RUN apk add --no-cache curl && curl -f https://get.pnpm.io/v6.16.js | node - add
 COPY package.json ./
 RUN pnpm install --frozen-lockfile
 
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_LOGIN_URL
+ARG NEXT_PUBLIC_MASTER_TOKEN
+RUN echo "NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL}" > .env
+RUN echo "NEXT_PUBLIC_LOGIN_URL=${NEXT_PUBLIC_LOGIN_URL}" >> .env
+RUN echo "NEXT_PUBLIC_MASTER_TOKEN=${NEXT_PUBLIC_MASTER_TOKEN}" >> .env
+
 FROM node:18-alpine AS builder
 WORKDIR /app
 COPY . .
