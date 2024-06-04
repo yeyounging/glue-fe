@@ -4,18 +4,16 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
-RUN apk add --no-cache curl
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
-
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
-RUN pnpm install --frozen-lockfile
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
 
 # 2. 빌드 단계
 FROM deps AS builder
 WORKDIR /app
 
+RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
@@ -28,6 +26,7 @@ WORKDIR /app
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/dist /app/dist
 
 EXPOSE 3000
 
