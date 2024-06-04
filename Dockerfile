@@ -4,10 +4,12 @@ ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 
+RUN apk add --no-cache curl
+RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
+
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
-RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 
 # 2. 빌드 단계
