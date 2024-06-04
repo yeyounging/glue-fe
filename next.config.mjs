@@ -9,12 +9,7 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
-        port: '',
-      },
-      {
-        protocol: 'https',
-        hostname: process.env.NEXT_PUBLIC_STICKER_URL,
+        hostname: 's3.ap-northeast-2.amazonaws.com',
         port: '',
       },
     ],
