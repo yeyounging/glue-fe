@@ -1,25 +1,24 @@
 # 1. 환경 설정
-FROM node:20-slim AS deps
-ENV PNPM_HOME="/pnpm"
-ENV PATH="$PNPM_HOME:$PATH"
-RUN corepack enable
+FROM node:18-alpine AS deps
+RUN apk add --no-cache libc6-compat
 
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --prod --frozen-lockfile
+RUN yarn install -g pnpm
+RUN pnpm install --frozen-lockfile
 
 # 2. 빌드 단계
-FROM node:20-slim AS builder
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
+FROM node:18-alpine AS builder
 WORKDIR /app
+COPY --from=deps /usr/local/bin/pnpm /usr/local/bin/pnpm
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 RUN pnpm run build
 
 # 3. 실행 단계
-FROM node:20-slim AS runner
+FROM node:18-alpine AS runner
 WORKDIR /app
 
 COPY --from=builder /app/public ./public
