@@ -1,7 +1,7 @@
 import { atom, useRecoilState } from 'recoil';
 import { ImageProps } from '../components/Sticker/types';
 
-export const STICKER_KEY = 'renderedStickers';
+export const STICKER_KEY = 'rendered-stickers';
 
 // FIXME: 이미지에 맞게 수정
 export const StickerState = atom<ImageProps[]>({

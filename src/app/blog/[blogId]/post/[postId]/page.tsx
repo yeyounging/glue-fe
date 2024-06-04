@@ -6,6 +6,7 @@ import '@blocknote/react/style.css';
 import { usePostDetailContext } from './components/PostDetailFetcher/PostDetailContext';
 import CommentsWrapper from './components/CommentsWrapper';
 import PostDetailHeader from './components/PostDetailHeader';
+import StickerRenderer from './components/StickerRenderer';
 
 const Editor = dynamic(() => import('@/components/Common/Editor'), {
   ssr: false,
@@ -16,13 +17,17 @@ export default function Page({
 }: {
   params: { postId: string };
 }) {
-  const { postDetail } = usePostDetailContext();
+  const {
+    postDetail: { content },
+  } = usePostDetailContext();
 
   return (
     <>
       <PostDetailHeader postId={postId} />
 
-      <Editor editable={false} initialData={postDetail.content} />
+      <Editor editable={false} initialData={content} />
+
+      <StickerRenderer />
 
       <CommentsWrapper postId={postId} />
     </>
