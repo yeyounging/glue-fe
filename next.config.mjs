@@ -1,5 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  compress: true,
   webpack: (config) => {
     config.externals = [...config.externals, { canvas: 'canvas' }]; // required to make Konva & react-konva work
     return config;
@@ -18,6 +19,7 @@ const nextConfig = {
       },
     ],
   },
+  output: 'standalone',
 };
 
 export default nextConfig;
