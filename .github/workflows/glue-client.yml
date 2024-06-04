@@ -11,11 +11,9 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
-      - name: env 파일 생성 및 추가하는중..
+      - name: Create .env file
         run: |
-          touch ./.env
-          echo "${{ secrets.ENV }}" >> ./.env
-        shell: bash
+          echo "${{ toJson(secrets) }}" | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > .env
 
       - name: 액션 스테이터스를 체크중...
         uses: actions/checkout@v3
