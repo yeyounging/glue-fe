@@ -11,6 +11,10 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
       - name: ENV File 설정중
         run: |
           touch .env
