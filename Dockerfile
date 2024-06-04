@@ -1,11 +1,11 @@
 # 1. 환경 설정
 FROM node:18-alpine AS deps
+RUN apk add --no-cache libc6-compat
+
 WORKDIR /app
-
-RUN apk add --no-cache curl
-RUN curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
-
 COPY package.json pnpm-lock.yaml ./
+
+RUN npm install -g pnpm 
 RUN pnpm install --frozen-lockfile
 
 # 2. 빌드 단계
