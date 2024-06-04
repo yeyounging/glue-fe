@@ -2,9 +2,13 @@
 
 import { useState, useCallback } from 'react';
 import { usePostFollow } from '../api/quries';
+import { usePostDetailContext } from '../../PostDetailFetcher/PostDetailContext';
 
 export default function useFollow(postId: number) {
-  const [follow, setFollow] = useState<boolean>(false);
+  const {
+    postDetail: { isSubscribe },
+  } = usePostDetailContext();
+  const [follow, setFollow] = useState<boolean>(isSubscribe);
   const { mutate: postFollow } = usePostFollow();
 
   const handleFollow = useCallback(() => {
