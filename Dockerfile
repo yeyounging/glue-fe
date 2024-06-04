@@ -5,7 +5,7 @@ RUN apk add --no-cache libc6-compat
 WORKDIR /app
 COPY package.json pnpm-lock.yaml ./
 
-RUN yarn install -g pnpm
+RUN npm install -g pnpm
 RUN pnpm install --frozen-lockfile
 
 # 2. 빌드 단계
