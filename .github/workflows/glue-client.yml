@@ -11,6 +11,12 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
+      - name: env 파일 생성 및 추가하는중..
+        run: |
+          touch ./.env
+          echo "${{ secrets.ENV }}" >> ./.env
+        shell: bash
+
       - name: 액션 스테이터스를 체크중...
         uses: actions/checkout@v3
 
@@ -30,7 +36,7 @@ jobs:
       - name: 코드 린트중..
         run: pnpm run lint
 
-      - name: 빌드 중입니다.
+      - name: 빌드 중..
         run: pnpm run build
 
       - name: 도커 레지스트리 로그인중...
