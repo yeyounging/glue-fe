@@ -54,10 +54,10 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.GLUE_PROJECT }}/glue-repository/glue-client:${{ github.sha }}
-          build-args:
-            - NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
-            - NEXT_PUBLIC_LOGIN_URL=${{ secrets.NEXT_PUBLIC_LOGIN_URL }}
-            - NEXT_PUBLIC_MASTER_TOKEN=${{ secrets.NEXT_PUBLIC_MASTER_TOKEN }}
+          build-args: |
+            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
+            NEXT_PUBLIC_LOGIN_URL=${{ secrets.NEXT_PUBLIC_LOGIN_URL }}
+            NEXT_PUBLIC_MASTER_TOKEN=${{ secrets.NEXT_PUBLIC_MASTER_TOKEN }}
 
   update-manifest-state:
     runs-on: ubuntu-latest
