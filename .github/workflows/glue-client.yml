@@ -11,35 +11,6 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
-      - name: Create .env file
-        run: |
-          echo "${{ toJson(secrets) }}" | jq -r 'to_entries|map("\(.key)=\(.value|tostring)")|.[]' > .env
-
-      - name: env 파일이 존재하는지 확인중..
-        run: cat .env
-
-      - name: 액션 스테이터스를 체크중...
-        uses: actions/checkout@v3
-
-      - name: node 설치중..
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: pnpm 설치중..
-        run: |
-          curl -f https://get.pnpm.io/v6.16.js | node - add --global pnpm
-          pnpm config set store-dir ~/.pnpm-store
-
-      - name: 의존성 설치중...
-        run: pnpm install --frozen-lockfile
-
-      - name: 코드 린트중..
-        run: pnpm run lint
-
-      - name: 빌드 중..
-        run: pnpm run build
-
       - name: 도커 레지스트리 로그인중...
         uses: docker/login-action@v2
         with:
