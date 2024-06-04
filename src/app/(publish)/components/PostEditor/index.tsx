@@ -108,7 +108,7 @@ export default function PostEditor({ postDetail = {} }: PostEditorProp) {
           wrapperClassName="px-45"
           className="outline-none placeholder:text-[#999] text-36"
           placeholder="제목을 입력해주세요."
-          value={title}
+          value={editedTitle}
           onValueChange={setEditedTitle}
         />
 
