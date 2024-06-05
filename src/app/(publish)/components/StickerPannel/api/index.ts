@@ -1,12 +1,8 @@
 import { http } from '@/api';
-
-export interface PostGenerateStickerResponse {
-  stickerId: number;
-  url: string;
-}
+import { StickerItem } from '../../StickerFetcher/api';
 
 export const postGenerateSticker = (query: string) =>
-  http.post<PostGenerateStickerResponse>({
+  http.post<StickerItem>({
     url: '/stickers',
     params: { prompt: query },
     data: query,
