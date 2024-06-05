@@ -2,7 +2,7 @@ name: Glue Client CI/CD Pipeline
 
 on:
   push:
-    branches: ["GLUE-364-Feat-CI/CD구축"]
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -19,10 +19,6 @@ jobs:
         run: |
           touch .env
           echo "${{ secrets.ENV }}" >> .env
-        shell: bash
-
-      - name: ENV File 내용 확인중
-        run: cat .env
         shell: bash
 
       - name: 도커 레지스트리 로그인중...
