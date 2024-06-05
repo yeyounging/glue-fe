@@ -5,12 +5,11 @@ export interface StickerItem {
   url: string;
 }
 
-interface StickerPaginationResponse {
-  content: { stickerItems: StickerItem[] }[];
+export interface StickerPaginationResponse {
+  content: { stickerItems: StickerItem[] };
   totalPage: number;
   totalElements: number;
   size: number;
-  // FIXME: current page
   number: number;
   hasNext: boolean;
   isFirst: boolean;
