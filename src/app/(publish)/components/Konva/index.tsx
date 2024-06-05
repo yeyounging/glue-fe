@@ -5,6 +5,7 @@ import { Layer, Stage } from 'react-konva';
 import { cn } from '@/utils';
 import { Sticker } from '../Sticker';
 import { useRecoilStickerState } from '../../store';
+import useChangeKonvaImage from './hooks';
 
 interface KonvaProps {
   enable: boolean;
@@ -13,6 +14,8 @@ interface KonvaProps {
 export default function Konva({ enable = false }: KonvaProps) {
   const { stickerStates } = useRecoilStickerState();
   const [selectedId, selectShape] = useState<number | null>(null);
+  const { handleStickerDragEnd, handleStickerTransformEnd } =
+    useChangeKonvaImage();
 
   return (
     <div className={cn('absolute z-[-1]', enable && 'z-[210000000]')}>
@@ -20,8 +23,7 @@ export default function Konva({ enable = false }: KonvaProps) {
         width={1470}
         height={1900}
         onMouseDown={(e) => {
-          const clickedOnEmpty = e.target === e.target.getStage();
-          if (clickedOnEmpty) {
+          if (e.target === e.target.getStage()) {
             selectShape(null);
           }
         }}
@@ -29,16 +31,13 @@ export default function Konva({ enable = false }: KonvaProps) {
         <Layer>
           {stickerStates.map((image) => (
             <Sticker
-              onDragEnd={(event) => ({
-                ...image,
-                [image.x]: event.target.x(),
-                [image.y]: event.target.y(),
-              })}
-              key={image.src}
+              onTransformEnd={(event) =>
+                handleStickerTransformEnd(event, image.id)
+              }
+              onDragEnd={(event) => handleStickerDragEnd(event, image.id)}
+              key={image.id}
               image={image}
-              onSelect={() => {
-                selectShape(image.id);
-              }}
+              onSelect={() => selectShape(image.id)}
               isSelected={selectedId === image.id}
             />
           ))}

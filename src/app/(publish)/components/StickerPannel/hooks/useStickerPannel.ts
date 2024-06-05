@@ -31,22 +31,19 @@ export default function useStickerPannel() {
   }, [imageString]);
 
   const addStickerToPanel = useCallback(
-    ({
-      src,
-      width,
-      height,
-      x,
-      y,
-    }: Omit<ImageProps, 'resetButtonRef' | 'id'>) => {
+    ({ src }: Pick<ImageProps, 'src'>) => {
       setStickerStates((currentImages) => [
         ...currentImages,
         {
           id: generateId(),
-          width,
-          height,
-          x,
-          y,
           src,
+          width: 60,
+          height: 60,
+          x: 300,
+          y: 300,
+          scaleX: 1,
+          scaleY: 1,
+          rotation: 0,
         },
       ]);
     },

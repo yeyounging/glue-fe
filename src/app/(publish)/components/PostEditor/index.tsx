@@ -72,7 +72,6 @@ export default function PostEditor({ postDetail = {} }: PostEditorProp) {
           <NavigationIcons />
 
           <div className="flex gap-12 font-pretendard font-medium">
-            {/* TODO: 글 업로드 */}
             <Button
               className="bg-[#E3E3E3] w-60 h-30"
               onClick={() =>

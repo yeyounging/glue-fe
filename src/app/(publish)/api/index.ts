@@ -7,7 +7,6 @@ export interface BlogPostRequest {
   temporaryState: boolean;
   categoryName: string;
   hashtags?: string[];
-  photoUrls?: string[];
 }
 
 export const postBlogPost = ({ blogId, ...post }: BlogPostRequest) =>

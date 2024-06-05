@@ -1,3 +1,4 @@
+import { KonvaEventObject } from 'konva/lib/Node';
 import { KonvaNodeEvents } from 'react-konva';
 
 export interface ImageProps {
@@ -7,6 +8,9 @@ export interface ImageProps {
   x: number;
   y: number;
   src: string;
+  rotation: number;
+  scaleX: number;
+  scaleY: number;
 }
 
 export interface StickerProps {
@@ -14,4 +18,5 @@ export interface StickerProps {
   onDragEnd: KonvaNodeEvents['onDragEnd'];
   isSelected: boolean;
   onSelect: () => void;
+  onTransformEnd: (event: KonvaEventObject<DragEvent>) => void;
 }
