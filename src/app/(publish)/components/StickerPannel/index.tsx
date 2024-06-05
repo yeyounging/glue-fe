@@ -66,7 +66,6 @@ export default function StickerPannel({
         )}
       </div>
 
-      {/* TODO: 검색 기능 구현 */}
       {showStickers && (
         <>
           <Input

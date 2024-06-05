@@ -1,7 +1,7 @@
 'use client';
 
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getPostDetail } from './api';
+import { getPostDetail } from '.';
 
 export const usePostDetail = (id: number) =>
   useSuspenseQuery({

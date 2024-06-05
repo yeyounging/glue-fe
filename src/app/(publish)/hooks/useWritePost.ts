@@ -1,9 +1,9 @@
 'use client';
 
+import { useCallback } from 'react';
 import { safeSeesionStorage } from '@/utils';
 import { EDITOR_KEY } from '@/components/Common/Editor/constants';
 import { useToastContext } from '@/components/Common/Toast/ToastProvider';
-import { useCallback } from 'react';
 import { usePost } from '../api/queries';
 import { BlogPostRequest } from '../api';
 
@@ -15,7 +15,6 @@ export default function useWritePost() {
   // TODO: refactor
   const handleSubmitPost = useCallback(
     (
-      // FIXME: blogId 변경
       post: Omit<BlogPostRequest, 'content' | 'temporaryState' | 'blogId'>,
       publishState: 'publish' | 'save' = 'save',
     ) => {

@@ -3,7 +3,6 @@ export interface Comment {
   commentId: number;
   content: string;
 
-  // 블로그 프로필 이미지
   blogProfile: string;
   blogTitle: string;
   createdAt: string;

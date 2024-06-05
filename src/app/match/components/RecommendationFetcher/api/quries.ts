@@ -1,5 +1,5 @@
 import { useSuspenseQuery } from '@tanstack/react-query';
-import { getRecommendation } from './api';
+import { getRecommendation } from '.';
 
 export const useRecommendation = () =>
   useSuspenseQuery({
