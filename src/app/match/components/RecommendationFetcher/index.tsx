@@ -2,7 +2,7 @@
 
 import { StrictPropsWithChildren } from '@/types';
 import { RecommendationProvider } from './RecommendationContext';
-import { useRecommendation } from './quries';
+import { useRecommendation } from './api/quries';
 
 export default function MatchingFetcher({ children }: StrictPropsWithChildren) {
   const { data } = useRecommendation();

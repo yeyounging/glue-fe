@@ -2,7 +2,7 @@
 
 import { StrictPropsWithChildren } from '@/types';
 import { PostDetailProvider } from './PostDetailContext';
-import { usePostDetail } from './quries';
+import { usePostDetail } from './api/quries';
 
 export default function PostDetailFetcher({
   children,

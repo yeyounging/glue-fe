@@ -1,13 +1,13 @@
 'use client';
 
-import Image from 'next/image';
-import { Dispatch, SetStateAction, useCallback, useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { Button, Input, StickerClose, StickerStar } from '@/components/Common';
 import { cn } from '@/utils';
+import { AsyncBoundaryWithQuery } from '@/react-utils';
 import { Ghost, Github, Smile, Star } from '../../constants/dummyIcons';
 import useStickerPannel from './hooks/useStickerPannel';
-import { useGenerateSticker } from './api/quries';
-import { PostGenerateStickerResponse } from './api';
+import StickerPannelRenderer from './components/StickerPannelRenderer';
+import StickerFetcher from '../StickerFetcher';
 
 // TODO: Icon이 선택되는 경우 색상이 변경되도록 attribute 설정
 const stickerTabs = [
@@ -27,32 +27,20 @@ export default function StickerPannel({
   setEditable,
 }: StickerPannelProp) {
   const [selectedId, setSelectedId] = useState<number>(0);
-  const { addStickerToPanel, showStickers, setShowStickers } =
-    useStickerPannel();
-  const [imageString, setImageString] = useState<string>('');
-  const [imageUrls, setImageUrls] = useState<PostGenerateStickerResponse[]>([]);
-
-  const { mutate } = useGenerateSticker();
-
-  const handleGenerateSticker = useCallback(() => {
-    if (!imageString) {
-      // eslint-disable-next-line
-      alert('asdf');
-      return;
-    }
-    mutate(imageString, {
-      onSuccess: ({ result }) => {
-        setImageString('');
-        setImageUrls((prev) => [result, ...prev]);
-      },
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageString]);
+  const {
+    addStickerToPanel,
+    showStickers,
+    setShowStickers,
+    handleGenerateSticker,
+    imageString,
+    setImageString,
+    imageUrls,
+  } = useStickerPannel();
 
   return (
     <aside
       className={cn(
-        'w-300 h-[577px] rounded-16 px-23 py-20 absolute top-85 left-30 transition-all duration-200',
+        'w-300 h-[577px] rounded-16 px-23 py-20 absolute top-85 left-30 transition-all duration-200 overflow-scroll',
         showStickers && 'shadow-background bg-white',
         !editable && 'z-[210000001]',
       )}
@@ -78,7 +66,6 @@ export default function StickerPannel({
         )}
       </div>
 
-      {/* TODO: 검색 기능 구현 */}
       {showStickers && (
         <>
           <Input
@@ -101,7 +88,7 @@ export default function StickerPannel({
       )}
 
       {showStickers && (
-        <section className="mt-20">
+        <section className="mt-20 overflow-scroll">
           <div>
             <div className="flex gap-2 px-20 mb-6">
               {stickerTabs.map(({ id, Icon }) => (
@@ -120,29 +107,16 @@ export default function StickerPannel({
             <div className="w-full h-1 bg-[#D8D8D8]" />
           </div>
 
-          <div className="grid grid-cols-3 justify-items-center items-center gap-20 mt-20">
-            {imageUrls.map(({ stickerId, url }) => (
-              <Image
-                key={`${stickerId}`}
-                src={url}
-                alt={`${stickerId}`}
-                width={60}
-                height={60}
-                className="cursor-pointer"
-                onClick={() => {
-                  addStickerToPanel({
-                    src: `${url}`,
-                    width: 60,
-                    height: 60,
-                    x: 300,
-                    y: 300,
-                  });
-                  setShowStickers(() => false);
-                  setEditable(() => false);
-                }}
+          <AsyncBoundaryWithQuery>
+            <StickerFetcher>
+              <StickerPannelRenderer
+                imageUrls={imageUrls}
+                addStickerToPanel={addStickerToPanel}
+                setEditable={setEditable}
+                setShowStickers={setShowStickers}
               />
-            ))}
-          </div>
+            </StickerFetcher>
+          </AsyncBoundaryWithQuery>
         </section>
       )}
     </aside>
