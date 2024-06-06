@@ -2,11 +2,7 @@
 
 import { useState, useEffect } from 'react';
 
-const useDefaultFile = (
-  fileSrc: string,
-  fileName: string,
-  fileType: string,
-) => {
+const useReadFile = (fileSrc: string, fileName: string, fileType: string) => {
   const [file, setFile] = useState<File | null>(null);
 
   useEffect(() => {
@@ -28,4 +24,4 @@ const useDefaultFile = (
   return [file, setFile] as const;
 };
 
-export default useDefaultFile;
+export default useReadFile;
