@@ -2,7 +2,7 @@ name: Glue Client CI/CD Pipeline
 
 on:
   push:
-    branches: ['main']
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -11,6 +11,16 @@ jobs:
   build-and-push-image:
     runs-on: ubuntu-latest
     steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: ENV File 설정중
+        run: |
+          touch .env
+          echo "${{ secrets.ENV }}" >> .env
+        shell: bash
+
       - name: 도커 레지스트리 로그인중...
         uses: docker/login-action@v2
         with:
@@ -25,10 +35,6 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.GLUE_PROJECT }}/glue-repository/glue-client:${{ github.sha }}
-          build-args: |
-            NEXT_PUBLIC_API_URL=${{ secrets.NEXT_PUBLIC_API_URL }}
-            NEXT_PUBLIC_LOGIN_URL=${{ secrets.NEXT_PUBLIC_LOGIN_URL }}
-            NEXT_PUBLIC_MASTER_TOKEN=${{ secrets.NEXT_PUBLIC_MASTER_TOKEN }}
 
   update-manifest-state:
     runs-on: ubuntu-latest
@@ -39,7 +45,7 @@ jobs:
         with:
           repository: ${{ secrets.GIT_PROJECT }}/glue-msa-config
           token: ${{ secrets.GIT_TOKEN }}
-          ref: 'main'
+          ref: "main"
 
       - name: yq 설치중..
         run: sudo snap install yq
