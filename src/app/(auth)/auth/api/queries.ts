@@ -10,7 +10,7 @@ export const usePostLogin = (code: string) =>
     mutationFn: () => postLogin({ code }),
 
     onSuccess: ({ result: { accessToken } }) => {
-      getQueryClient().invalidateQueries({ queryKey: ['login'] });
       Cookies.set(ACCESS_TOKEN, accessToken);
+      getQueryClient().invalidateQueries({ queryKey: ['login'] });
     },
   });
