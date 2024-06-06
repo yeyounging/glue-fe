@@ -14,9 +14,9 @@ export default function StickerRenderer() {
         width={60}
         height={60}
         alt="스티커 alt"
-        className="absolute"
+        className="absolute z-[100]"
         style={{
-          transform: `translate(${xLocation}px, ${yLocation}px) rotate(${rotation}deg) scaleX(${scaleX / 100}) scaleY(${scaleY / 100})`,
+          transform: `translate(${xLocation - 250}px, ${yLocation - 300}px) rotate(${rotation}deg) scaleX(${scaleX}) scaleY(${scaleY})`,
         }}
       />
     ),
