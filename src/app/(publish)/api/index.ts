@@ -26,4 +26,4 @@ export type NonParameterBlogPostRequest =
   | 'postStickerItemList';
 
 export const postBlogPost = ({ ...post }: BlogPostRequest) =>
-  http.post({ url: `/posts`, data: post });
+  http.post({ url: `/posts/`, data: post });
