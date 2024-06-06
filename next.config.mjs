@@ -19,7 +19,7 @@ const nextConfig = {
       },
       {
         protocol: 'http',
-        hostname: 'glueyourday.kro.kr',
+        hostname: 'www.glueyourday.kro.kr',
         port: '',
       },
     ],
