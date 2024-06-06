@@ -16,10 +16,11 @@ export default function Page({
     const login = () => {
       try {
         mutate();
-
-        push('/');
-      } catch (err) {
-        // TODO: error 세분화
+        // eslint-disable-next-line
+      } catch (err: any) {
+        // eslint-disable-next-line
+        console.error(err.message);
+      } finally {
         push('/');
       }
     };
