@@ -4,14 +4,15 @@ import { useToastContext } from '@/components/Common/Toast/ToastProvider';
 import { safeSeesionStorage } from '@/utils';
 import { postBlogPost, BlogPostRequest } from '.';
 
-export const usePost = (id: number) => {
+export const usePost = () => {
   const { push } = useRouter();
   const { handleSuccess, handleError, handleLoading, toastId } =
     useToastContext();
 
   return useMutation({
-    mutationKey: ['post', id],
+    mutationKey: ['post'],
     mutationFn: (post: BlogPostRequest) => postBlogPost(post),
+    gcTime: 0,
 
     onMutate: () => {
       handleLoading('게시물 등록 중');

@@ -1,3 +1,5 @@
+'use client';
+
 import { useRef, useEffect } from 'react';
 import useImage from 'use-image';
 import Konva from 'konva';
@@ -10,6 +12,7 @@ export function Sticker({
   onDragEnd,
   isSelected,
   onSelect,
+  onTransformEnd,
 }: StickerProps) {
   const imageRef = useRef<Image>(null);
   const trRef = useRef<Konva.Transformer>(null);
@@ -35,9 +38,7 @@ export function Sticker({
       draggable
       x={x}
       y={y}
-      onDragEnd={(event) => {
-        onDragEnd?.(event);
-      }}
+      onDragEnd={(event) => onDragEnd?.(event)}
       onClick={onSelect}
     >
       <KonvaImage
@@ -45,6 +46,7 @@ export function Sticker({
         width={width}
         height={stickerHeight}
         image={stickerImage}
+        onTransformEnd={onTransformEnd}
       />
 
       {isSelected && (

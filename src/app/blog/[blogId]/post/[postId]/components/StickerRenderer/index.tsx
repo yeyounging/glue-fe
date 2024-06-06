@@ -3,34 +3,22 @@ import { usePostDetailContext } from '../PostDetailFetcher/PostDetailContext';
 
 export default function StickerRenderer() {
   const {
-    postDetail: {
-      postStickerUrlItems: { postStickerId },
-    },
+    postDetail: { postStickerItems },
   } = usePostDetailContext();
 
-  return postStickerId.map(({ postStickerItem, url }) => {
-    const {
-      xLocation,
-      yLocation,
-      width,
-      height,
-      angle,
-      postStickerId: stickerId,
-    } = postStickerItem;
-    return (
+  return postStickerItems.map(
+    ({ xLocation, yLocation, scaleX, scaleY, rotation, stickerId, url }) => (
       <Image
-        key={stickerId}
+        key={`${xLocation}${yLocation}${stickerId}`}
         src={url}
-        width={width}
-        height={height}
-        alt={`${postStickerId} alt`}
-        className="absolute"
+        width={60}
+        height={60}
+        alt="스티커 alt"
+        className="absolute z-[100]"
         style={{
-          transform: `translate(${xLocation}px, ${yLocation}px) rotate(${angle}deg)`,
-          width: `${width}px`,
-          height: `${height}px`,
+          transform: `translate(${xLocation - 250}px, ${yLocation - 300}px) rotate(${rotation}deg) scaleX(${scaleX}) scaleY(${scaleY})`,
         }}
       />
-    );
-  });
+    ),
+  );
 }

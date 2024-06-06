@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useState } from 'react';
-import { generateId } from '@/utils';
+import { useToastContext } from '@/components/Common/Toast/ToastProvider';
 import { useRecoilStickerState } from '../../../store';
 import { ImageProps } from '../../Sticker/types';
 import { useGenerateSticker } from '../api/quries';
@@ -12,15 +12,20 @@ export default function useStickerPannel() {
   const [showStickers, setShowStickers] = useState<boolean>(false);
   const [imageString, setImageString] = useState<string>('');
   const [imageUrls, setImageUrls] = useState<StickerItem[]>([]);
+  const { toastId, handleError } = useToastContext();
 
-  const { mutate } = useGenerateSticker();
+  const { mutate, isPending } = useGenerateSticker();
 
   const handleGenerateSticker = useCallback(() => {
     if (!imageString) {
-      // eslint-disable-next-line
-      alert('asdf');
+      handleError('이미지 생성어를 입력해주세요.');
       return;
     }
+    if (isPending) {
+      handleError('이미지가 생성 중이에요.');
+      return;
+    }
+
     mutate(imageString, {
       onSuccess: ({ result }) => {
         setImageString('');
@@ -28,25 +33,22 @@ export default function useStickerPannel() {
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageString]);
+  }, [imageString, toastId, isPending]);
 
   const addStickerToPanel = useCallback(
-    ({
-      src,
-      width,
-      height,
-      x,
-      y,
-    }: Omit<ImageProps, 'resetButtonRef' | 'id'>) => {
+    ({ src, id }: Pick<ImageProps, 'src' | 'id'>) => {
       setStickerStates((currentImages) => [
         ...currentImages,
         {
-          id: generateId(),
-          width,
-          height,
-          x,
-          y,
+          id,
           src,
+          width: 60,
+          height: 60,
+          x: 300,
+          y: 300,
+          scaleX: 1,
+          scaleY: 1,
+          rotation: 0,
         },
       ]);
     },

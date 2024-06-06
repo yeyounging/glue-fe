@@ -20,12 +20,14 @@ export default function Comments({ postId }: { postId: number }) {
         <Comment key={commentItem.commentId} {...{ ...commentItem, postId }} />
       ))}
 
-      <Pagination
-        page={page}
-        setPage={setPage}
-        total={totalPage}
-        className="flex justify-end py-9 gap-8"
-      />
+      {commentItems.length > 0 && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          total={totalPage}
+          className="flex justify-end py-9 gap-8"
+        />
+      )}
     </>
   );
 }

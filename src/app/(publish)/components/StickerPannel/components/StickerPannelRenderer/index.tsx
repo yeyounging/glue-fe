@@ -15,18 +15,12 @@ export default function StickerPannelRenderer({
   imageUrls: StickerItem[];
   setShowStickers: Dispatch<SetStateAction<boolean>>;
   setEditable: Dispatch<SetStateAction<boolean>>;
-  addStickerToPanel: ({
-    src,
-    width,
-    height,
-    x,
-    y,
-  }: Omit<ImageProps, 'id' | 'resetButtonRef'>) => void;
+  addStickerToPanel: ({ src }: Pick<ImageProps, 'src' | 'id'>) => void;
 }) {
   const { stickers, fetchRef, isFetching } = useStickerContext();
   const stickerImage = useMemo(
     () => [...imageUrls, ...stickers],
-    [stickers, imageUrls],
+    [imageUrls, stickers],
   );
 
   return (
@@ -42,11 +36,8 @@ export default function StickerPannelRenderer({
             className="cursor-pointer"
             onClick={() => {
               addStickerToPanel({
-                src: `${url}`,
-                width: 60,
-                height: 60,
-                x: 300,
-                y: 300,
+                id: stickerId,
+                src: url,
               });
               setShowStickers(() => false);
               setEditable(() => false);

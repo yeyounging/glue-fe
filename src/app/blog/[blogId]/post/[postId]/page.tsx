@@ -25,9 +25,9 @@ export default function Page({
     <>
       <PostDetailHeader postId={postId} />
 
-      <Editor editable={false} initialData={content} />
-
       <StickerRenderer />
+
+      <Editor editable={false} initialData={content} className="min-h-500" />
 
       <CommentsWrapper postId={postId} />
     </>
