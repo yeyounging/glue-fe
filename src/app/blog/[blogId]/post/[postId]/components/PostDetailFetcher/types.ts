@@ -2,18 +2,14 @@ import { PartialBlock } from '@blocknote/core';
 
 interface Sticker {
   postStickerItem: {
-    xlocation: number;
-    ylocation: number;
-    postStickerId: number;
-    postId: number;
     stickerId: number;
     xLocation: number;
     yLocation: number;
-    width: number;
-    height: number;
-    angle: number;
+    rotation: number;
+    scaleX: number;
+    scaleY: number;
+    url: string;
   };
-  url: string;
 }
 
 export interface PostDetailResponse {
