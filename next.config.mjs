@@ -17,6 +17,11 @@ const nextConfig = {
         hostname: process.env.NEXT_PUBLIC_IMAGE_URL,
         port: '',
       },
+      {
+        protocol: 'http',
+        hostname: 'glueyourday.kro.kr',
+        port: '',
+      },
     ],
   },
   output: 'standalone',
