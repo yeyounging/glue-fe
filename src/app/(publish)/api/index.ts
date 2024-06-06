@@ -11,7 +11,6 @@ interface StickerRequest {
 }
 
 export interface BlogPostRequest {
-  blogId: number;
   title: string;
   content: string;
   temporaryState: boolean;
@@ -21,5 +20,10 @@ export interface BlogPostRequest {
   postStickerItemList: StickerRequest[];
 }
 
-export const postBlogPost = ({ blogId, ...post }: BlogPostRequest) =>
-  http.post({ url: `/posts/${blogId}`, data: post });
+export type NonParameterBlogPostRequest =
+  | 'content'
+  | 'temporaryState'
+  | 'postStickerItemList';
+
+export const postBlogPost = ({ ...post }: BlogPostRequest) =>
+  http.post({ url: `/posts`, data: post });
