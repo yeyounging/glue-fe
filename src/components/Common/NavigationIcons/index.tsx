@@ -10,7 +10,6 @@ export default function NavigationIcons() {
         <Search />
       </Link>
 
-      {/* TODO: HamburgerMenu 연결 */}
       <HeaderDrawer>
         <HamburgerMenu />
       </HeaderDrawer>
