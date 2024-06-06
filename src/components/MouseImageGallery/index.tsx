@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEvent, useRef } from 'react';
 import { range } from '@/utils';
-import { Trending, Write } from '../Common';
+import { LikeIcon, Trending, Write } from '../Common';
 
 export default function MouseImageGallery() {
   let steps = 0;
@@ -89,14 +89,21 @@ export default function MouseImageGallery() {
       <nav className="w-full px-30 pt-30 flex justify-between">
         <div className="flex gap-10">
           <p className="pt-3">kea</p>
+
           <Link className="z-[100]" href="/trending">
             <Trending />
           </Link>
         </div>
 
-        <Link href="/write" className="flex gap-10 z-[100]">
-          <Write />
-        </Link>
+        <div className="flex gap-10">
+          <Link href="/match" className="z-[100]">
+            <LikeIcon color="#000" />
+          </Link>
+
+          <Link href="/write" className="flex gap-10 z-[100]">
+            <Write />
+          </Link>
+        </div>
       </nav>
 
       {range(0, 20).map((__, index) => {

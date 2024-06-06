@@ -18,10 +18,10 @@ export const usePost = () => {
       handleLoading('게시물 등록 중');
     },
 
-    onSuccess: () => {
+    onSuccess: ({ result: { blogId, postId } }) => {
       handleSuccess('게시글 등록 완료!', { id: toastId });
       safeSeesionStorage.clear();
-      push('/');
+      push(`/blog/${blogId}/post/${postId}`);
     },
 
     onError: () => {
