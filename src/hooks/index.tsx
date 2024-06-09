@@ -5,3 +5,4 @@ export { default as useDisclosure } from './useDisclosure';
 export { default as useCallbackOnce } from './useCallbackOnce';
 export { default as useOutsideClick } from './useOutsideClick';
 export { default as useIntersect } from './useIntersect';
+export { default as useSearch } from './useSearch';

@@ -1,8 +1,4 @@
-export interface PaginationInfo {
-  hasNext: boolean;
-  isFirst: boolean;
-  isLast: boolean;
-}
+import { PaginationInfo } from '@/api';
 
 export interface SubscriptionList {
   blogId: number;

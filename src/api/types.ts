@@ -4,3 +4,9 @@ export interface BaseResponse<T> {
   message: string;
   result: T;
 }
+
+export interface PaginationInfo {
+  hasNext: boolean;
+  isFirst: boolean;
+  isLast: boolean;
+}
