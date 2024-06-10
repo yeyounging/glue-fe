@@ -5,7 +5,9 @@ import '@blocknote/core/fonts/inter.css';
 import '@blocknote/react/style.css';
 import { Block, BlockNoteEditor, PartialBlock } from '@blocknote/core';
 import { safeSeesionStorage } from '@/utils';
+import { postImage } from '@/api';
 import { EDITOR_KEY, LOADING } from '../constants';
+import { useToastContext } from '../../Toast/ToastProvider';
 
 interface EditorOptions {
   initialData?: PartialBlock[];
@@ -15,28 +17,18 @@ export default function useEditor(options?: EditorOptions) {
   const [initialContent, setInitialContent] = useState<
     PartialBlock[] | undefined | typeof LOADING
   >(options?.initialData);
+  const { handleError } = useToastContext();
 
   const safeSessionStorage = useMemo(() => safeSeesionStorage, []);
 
   const uploadFile = useCallback(async (file: File) => {
-    const body = new FormData();
-
     if (!file.type.startsWith('image')) {
-      // FIXME: refactor modal alert
-      // eslint-disable-next-line no-alert
-      alert('이미지만 업로드할 수 있습니다.');
-      return null;
+      handleError('이미지만 업로드할 수 있습니다.');
+      return '';
     }
 
-    body.append('file', file);
-
-    // FIXME: refactor 데이터 페치
-    const ret = await fetch('https://tmpfiles.org/api/v1/upload', {
-      method: 'POST',
-      body,
-    });
-    const result = (await ret.json()).data.url;
-    return result;
+    return (await postImage(file)).result.imageUrl;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const editor = useMemo(() => {

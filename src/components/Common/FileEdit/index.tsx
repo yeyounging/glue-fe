@@ -30,7 +30,7 @@ export default function FileEdit({
         onChange={handleFileSelect}
       />
       <Button
-        onClick={() => inputRef.current?.click()}
+        onClick={inputRef.current?.click}
         className="w-70 m-5 p-4 bg-primary/30 text-primary"
       >
         edit
