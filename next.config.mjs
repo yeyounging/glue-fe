@@ -8,7 +8,6 @@ const nextConfig = {
   images: {
     domains: [
       process.env.NEXT_PUBLIC_STICKER_URL,
-      ,
       process.env.NEXT_PUBLIC_IMAGE_URL,
       'glueyourday.kro.kr',
     ],
