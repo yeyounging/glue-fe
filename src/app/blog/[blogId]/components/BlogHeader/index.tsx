@@ -1,11 +1,16 @@
+'use client';
+
 import { Nav, NavigationIcons } from '@/components/Common';
+import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
 export default function BlogHeader({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  const title = ' do the best Zl금 ';
+  const {
+    blogInfo: { title },
+  } = useBlogPageContext();
 
   return (
     <div className="relative">

@@ -13,3 +13,5 @@ export { default as KakaoLoginIcon } from './KakaoLoginIcon';
 export { default as LikeIcon } from './LikeIcon';
 export { default as PaginationLeft } from './PaginationLeft';
 export { default as PaginationRight } from './PaginationRight';
+export { default as UpArrow } from './UpArrow';
+export { default as DownArrow } from './DownArrow';

@@ -1,13 +1,18 @@
+'use client';
+
 import Image from 'next/image';
-import bg from '../../../../../../public/images/bg-temp.jpeg';
+import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
 export default function BlogBackground() {
-  const description = 'Just keep swimming 🏄🏿‍♂️';
+  const {
+    blogInfo: { description, background },
+  } = useBlogPageContext();
+
   return (
     <div className="w-full h-screen">
       <div className="relative w-full h-full group">
         <Image
-          src={bg}
+          src={background}
           alt="background"
           layout="fill"
           objectFit="cover"

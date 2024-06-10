@@ -16,7 +16,7 @@ export default function Page() {
           <ProfileBox />
           <StoryBox />
         </section>
-        <section className="flex flex-row m-100">
+        <section className="flex flex-row m-100 h-full">
           <Tags />
           <Albums />
         </section>
