@@ -1,10 +1,14 @@
 import http from './core';
 
+interface PostImageResponse {
+  imageUrl: string;
+}
+
 export const postImage = (file: File) => {
   const formData = new FormData();
   formData.append('multipartFile', file);
 
-  return http.post<{ imageUrl: string }>({
+  return http.post<PostImageResponse>({
     url: '/blogs/images',
     data: formData,
     headers: {
@@ -12,5 +16,3 @@ export const postImage = (file: File) => {
     },
   });
 };
-
-export default postImage;
