@@ -45,6 +45,10 @@ export default function useFetchSticker() {
   useEffect(() => {
     setStickers([]);
     refetch();
+
+    return () => {
+      setStickers([]);
+    };
   }, [refetch]);
 
   return { stickers, fetchRef, isFetching };
