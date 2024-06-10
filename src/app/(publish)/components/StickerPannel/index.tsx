@@ -1,21 +1,12 @@
 'use client';
 
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import { Button, Input, StickerClose, StickerStar } from '@/components/Common';
 import { cn } from '@/utils';
 import { AsyncBoundaryWithQuery } from '@/react-utils';
-import { Ghost, Github, Smile, Star } from '../../constants/dummyIcons';
 import useStickerPannel from './hooks/useStickerPannel';
 import StickerPannelRenderer from './components/StickerPannelRenderer';
 import StickerFetcher from '../StickerFetcher';
-
-// TODO: Icon이 선택되는 경우 색상이 변경되도록 attribute 설정
-const stickerTabs = [
-  { id: 0, Icon: Github },
-  { id: 1, Icon: Ghost },
-  { id: 2, Icon: Smile },
-  { id: 3, Icon: Star },
-] as const;
 
 interface StickerPannelProp {
   editable: boolean;
@@ -26,7 +17,6 @@ export default function StickerPannel({
   editable,
   setEditable,
 }: StickerPannelProp) {
-  const [selectedId, setSelectedId] = useState<number>(0);
   const {
     addStickerToPanel,
     showStickers,
@@ -89,23 +79,7 @@ export default function StickerPannel({
 
       {showStickers && (
         <section className="mt-20 overflow-scroll">
-          <div>
-            <div className="flex gap-2 px-20 mb-6">
-              {stickerTabs.map(({ id, Icon }) => (
-                <Icon
-                  key={id}
-                  className={cn(
-                    'w-34 h-34 p-5 cursor-pointer',
-                    id === selectedId && 'bg-[#FFEBDF] rounded-4',
-                  )}
-                  onClick={() => setSelectedId(id)}
-                  selected={id === selectedId}
-                />
-              ))}
-            </div>
-
-            <div className="w-full h-1 bg-[#D8D8D8]" />
-          </div>
+          <div className="w-full h-1 bg-[#D8D8D8]" />
 
           <AsyncBoundaryWithQuery>
             <StickerFetcher>
