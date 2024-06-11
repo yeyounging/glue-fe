@@ -1,6 +1,5 @@
 'use client';
 
-import { HamburgerMenu } from '@/components/Common';
 import { generateId } from '@/utils';
 import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
@@ -16,9 +15,7 @@ export function Story({ title, content }: { title: string; content: string }) {
 }
 
 export default function StoryBox() {
-  const {
-    blogPostItem: { postItems },
-  } = useBlogPageContext();
+  const { postItems } = useBlogPageContext();
 
   return (
     <section className="w-full px-100">
@@ -28,7 +25,6 @@ export default function StoryBox() {
           <p className="w-130 h-3 bg-primary mb-2" />
           <p className="w-140 h-3 bg-primary mb-2" />
         </div>
-        <HamburgerMenu />
       </header>
       <article className="w-full grid grid-cols-2 gap-30 mt-40">
         {postItems.map(({ preview, title }) => (

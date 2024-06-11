@@ -1,11 +1,12 @@
 'use client';
 
-import { FileEdit } from '@/components/Common';
+import { Button, FileEdit } from '@/components/Common';
 import { FileThumbnails } from '../Common';
-import { useEdit } from '../hooks';
+import { useEdit, useSave } from '../hooks';
 
 export default function Background() {
   const { handleBackgroundFileChange, background, backgroundFile } = useEdit();
+  const { handleSave } = useSave();
 
   return (
     <section className="flex flex-col items-center pb-250 gap-100">
@@ -20,6 +21,9 @@ export default function Background() {
         />
         <FileEdit onFileSelect={handleBackgroundFileChange} />
       </div>
+      <Button className="w-100" onClick={handleSave}>
+        SAVE
+      </Button>
     </section>
   );
 }

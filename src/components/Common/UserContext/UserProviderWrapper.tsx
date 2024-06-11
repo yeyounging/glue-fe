@@ -8,7 +8,7 @@ export default function UserProviderWrapper({
 }: {
   children: React.ReactNode;
 }) {
-  const [loginId, setLoginId] = useState<number | null>(null);
+  const [loginId, setLoginId] = useState<number>(0);
 
   const contextValue = useMemo(
     () => ({

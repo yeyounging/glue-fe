@@ -4,3 +4,4 @@ export { default as BlogHeader } from './BlogHeader';
 export { default as Tags } from './Tags';
 export { default as ProfileBox } from './ProfileBox';
 export { default as StoryBox } from './StoryBox';
+export { default as Board } from './Board';

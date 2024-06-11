@@ -1,17 +1,12 @@
 'use client';
 
 import { useBlogPageContext } from '../BlogFetcher/BlogContext';
-import Slider from './\bSlider';
+import Slider from './Slider';
 
 export default function Albums() {
-  const {
-    blogPostItem: { postItems },
-  } = useBlogPageContext();
+  const { postItems } = useBlogPageContext();
 
-  // FIXME: photoUrl 적용
-  const photos = Array(20)
-    .fill(null)
-    .map((_, index) => postItems[index]?.photo || '/tempImage/6.jpg');
+  const photos = postItems.flatMap(({ photo }) => photo);
 
   return (
     <article className="flex flex-col w-full gap-20 px-100 items-start">

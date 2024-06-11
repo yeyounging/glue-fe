@@ -18,7 +18,7 @@ export default function BlogHeader({
         <div className="text-[20px] text-[#363636]">{title}</div>
         <NavigationIcons />
       </Nav>
-      <div className="absolute top-0">{children}</div>
+      <div className="absolute w-full top-0">{children}</div>
     </div>
   );
 }
