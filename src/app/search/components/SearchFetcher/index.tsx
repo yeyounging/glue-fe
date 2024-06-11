@@ -1,25 +1,87 @@
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useCallback, useMemo } from 'react';
+import { useIntersect } from '@/hooks';
 import { SearchResultProvider } from './SearchContext';
-import { useSearchResult } from './quries';
+import { useSearchResult } from './queries';
+import { SearchResponse } from './types';
 
 interface SearchResultFetcherProps {
   children: ReactNode;
-  page: number;
   size: number;
   keyword: string;
 }
 
 export function SearchResultFetcher({
   children,
-  page,
   size,
   keyword,
 }: SearchResultFetcherProps) {
-  const { data, refetch } = useSearchResult(page, size, keyword);
+  const { data, isLoading, fetchNextPage, hasNextPage } = useSearchResult(
+    keyword,
+    size,
+  );
 
-  useEffect(() => {
-    refetch();
-  }, [keyword, refetch]);
+  const handleIntersect = useCallback(
+    (entry: IntersectionObserverEntry) => {
+      if (entry.isIntersecting && hasNextPage && !isLoading) {
+        fetchNextPage();
+      }
+    },
+    [isLoading, hasNextPage, fetchNextPage],
+  );
 
-  return <SearchResultProvider {...data}>{children}</SearchResultProvider>;
+  const endOfListRef = useIntersect(handleIntersect);
+  const pages = data?.pages || [];
+  const mergedPostSearchItem = pages.reduce(
+    (acc, { result }) => {
+      acc.postSearchList.push(...result.postSearchItem.postSearchList);
+      acc.listSize += result.postSearchItem.listSize;
+      acc.totalPage = result.postSearchItem.totalPage;
+      acc.totalElements = result.postSearchItem.totalElements;
+      acc.hasNext = result.postSearchItem.hasNext;
+      return acc;
+    },
+    {
+      postSearchList: [] as SearchResponse['postSearchItem']['postSearchList'],
+      listSize: 0,
+      totalPage: 0,
+      totalElements: 0,
+      isFirst: true,
+      isLast: false,
+      hasNext: false,
+    },
+  );
+
+  const mergedBlogInfoItem = pages.reduce(
+    (acc, { result }) => {
+      acc.blogInfoList.push(...result.blogInfoItem.blogInfoList);
+      acc.listSize += result.blogInfoItem.listSize;
+      acc.totalPage = result.blogInfoItem.totalPage;
+      acc.totalElements = result.blogInfoItem.totalElements;
+      acc.hasNext = result.blogInfoItem.hasNext;
+      return acc;
+    },
+    {
+      blogInfoList: [] as SearchResponse['blogInfoItem']['blogInfoList'],
+      listSize: 0,
+      totalPage: 0,
+      totalElements: 0,
+      isFirst: true,
+      isLast: false,
+      hasNext: false,
+    },
+  );
+
+  const mergedData = useMemo(() => {
+    return {
+      postSearchItem: mergedPostSearchItem,
+      blogInfoItem: mergedBlogInfoItem,
+    };
+  }, [mergedPostSearchItem, mergedBlogInfoItem]);
+
+  return (
+    <SearchResultProvider {...mergedData}>
+      {children}
+      <div ref={endOfListRef} />
+    </SearchResultProvider>
+  );
 }

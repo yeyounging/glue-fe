@@ -1,5 +1,3 @@
-'use client';
-
 import { generateContext } from '@/react-utils';
 import { SearchResponse } from './types';
 

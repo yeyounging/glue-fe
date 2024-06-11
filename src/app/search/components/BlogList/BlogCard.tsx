@@ -17,9 +17,9 @@ export default function BlogCard({
   return (
     <Link
       href={`/blog/${id}`}
-      className="flex flex-col items-center justify-start border border-[#979696] rounded-2 shadow-sm"
+      className="flex flex-col items-center justify-start border border-[#979696] rounded-2 shadow-sm group"
     >
-      <div className="relative w-250 h-130 group">
+      <div className="relative w-250 h-130">
         <Image
           src={photoUrl}
           alt="bg"
