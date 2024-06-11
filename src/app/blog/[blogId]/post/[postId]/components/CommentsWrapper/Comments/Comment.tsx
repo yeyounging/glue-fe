@@ -29,7 +29,13 @@ export default function Comment(commentItem: CommentProp & { postId: number }) {
     >
       <div className="flex gap-8 items-center">
         {blogProfile ? (
-          <Image src={blogProfile} width={40} height={40} alt={blogTitle} />
+          <Image
+            loader={() => blogProfile}
+            src={blogProfile}
+            width={40}
+            height={40}
+            alt={blogTitle}
+          />
         ) : (
           <div className="bg-[black] w-40 h-40 rounded-full" />
         )}

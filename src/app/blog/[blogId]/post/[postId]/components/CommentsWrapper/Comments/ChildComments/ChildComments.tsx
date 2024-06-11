@@ -25,6 +25,7 @@ export default function ChildComments({ commentId }: { commentId: number }) {
             <div className="flex gap-8 items-center">
               {blogProfile ? (
                 <Image
+                  loader={() => blogProfile}
                   src={blogProfile}
                   width={40}
                   height={40}
