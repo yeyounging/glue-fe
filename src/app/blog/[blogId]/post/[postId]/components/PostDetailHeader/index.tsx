@@ -6,23 +6,18 @@ import { Button, Copy, Input } from '@/components/Common';
 import { formatDate } from '@/utils';
 import { usePortal } from '@/hooks';
 import { usePostDetailContext } from '../PostDetailFetcher/PostDetailContext';
-import useFollow from './hooks';
-import { useDeletePosting } from './api/quries';
+
+import { useHandlePostDetail } from './hooks';
 
 export default function PostDetailHeader({ postId }: { postId: string }) {
   const {
     postDetail: { title, createdAt, memberId, nickname },
     loginMemberId,
   } = usePostDetailContext();
-  const { follow, handleFollow } = useFollow(Number(postId));
 
   const port = usePortal({ id: 'edit-container' });
-  const { mutate } = useDeletePosting();
-
-  const handleDeletePosting = () => {
-    // TODO: 한번 더 확인하는 alert 필요
-    mutate(Number(postId));
-  };
+  const { handleDeletePosting, follow, handleFollow, handleCopy } =
+    useHandlePostDetail(Number(postId));
 
   return (
     <>
@@ -55,7 +50,6 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
 
         <div className="flex items-center justify-between px-5 border-b-1 border-[#D3D2D1] py-10">
           <div className="flex items-center gap-13">
-            {/* TODO: Image fedch */}
             <div className="w-30 h-30 rounded-full bg-primary" />
 
             <p>{nickname}</p>
@@ -63,7 +57,10 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
           </div>
 
           <div className="flex gap-10 items-center">
-            <Copy />
+            <Copy
+              className="cursor-pointer"
+              onClick={() => handleCopy(loginMemberId)}
+            />
 
             <motion.div whileTap={{ scale: 0.9 }}>
               <Button
