@@ -6,7 +6,9 @@ import Slider from './Slider';
 export default function Albums() {
   const { postItems } = useBlogPageContext();
 
-  const photos = postItems.flatMap(({ photo }) => photo);
+  const photos = postItems.flatMap(({ photo }) =>
+    photo ? photo.filter(Boolean) : [],
+  );
 
   return (
     <article className="flex flex-col w-full gap-20 px-100 items-start">

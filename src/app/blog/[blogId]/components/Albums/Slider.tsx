@@ -35,20 +35,22 @@ export default function Slider({ photos }: { photos: string[] }) {
           </div>
         ))}
       </div>
-      <div className="absolute inset-0 flex items-center justify-between px-4">
-        <Button
-          className="p-2 bg-[#f1efef] rounded-full opacity-50 hover:opacity-90"
-          onClick={prevSlide}
-        >
-          &lt; Prev
-        </Button>
-        <Button
-          className="p-2 bg-[#f1efef] rounded-full opacity-50 hover:opacity-90"
-          onClick={nextSlide}
-        >
-          Next &gt;
-        </Button>
-      </div>
+      {photoCount > 5 && (
+        <div className="absolute inset-0 flex items-center justify-between px-4">
+          <Button
+            className="p-2 bg-[#f1efef] rounded-full opacity-50 hover:opacity-90"
+            onClick={prevSlide}
+          >
+            &lt; Prev
+          </Button>
+          <Button
+            className="p-2 bg-[#f1efef] rounded-full opacity-50 hover:opacity-90"
+            onClick={nextSlide}
+          >
+            Next &gt;
+          </Button>
+        </div>
+      )}
     </div>
   );
 }

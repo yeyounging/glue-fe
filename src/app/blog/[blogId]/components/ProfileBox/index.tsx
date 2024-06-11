@@ -12,13 +12,18 @@ export default function ProfileBox() {
     memberName,
     loginBlogId,
   } = useBlogPageContext();
+  const defaultImage = '/images/profile.jpeg';
+
+  const imageLoader = ({ src }: { src: string }) => {
+    return src;
+  };
 
   return (
     <section className="flex flex-col  items-center mr-50">
       <div className="relative w-250 h-300 my-10 ">
         <Image
-          loader={() => profile}
-          src={profile}
+          loader={imageLoader}
+          src={profile || defaultImage}
           alt="profile"
           layout="fill"
           objectFit="cover"

@@ -4,16 +4,21 @@ import Image from 'next/image';
 import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
 export default function BlogBackground() {
+  const defaultImage = '/images/bg-temp.jpeg';
   const {
     blogInfo: { description, background },
   } = useBlogPageContext();
+
+  const imageLoader = ({ src }: { src: string }) => {
+    return src;
+  };
 
   return (
     <div className="relative w-full h-screen">
       <div className="relative w-full h-full group">
         <Image
-          loader={() => background}
-          src={background}
+          loader={imageLoader}
+          src={background || defaultImage}
           alt="background"
           layout="fill"
           objectFit="cover"
