@@ -4,7 +4,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEvent, useRef } from 'react';
 import { range } from '@/utils';
-import { LikeIcon, Trending, Write } from '../Common';
+import { LikeIcon, Mypage, Trending, Write } from '../Common';
 
 export default function MouseImageGallery() {
   let steps = 0;
@@ -98,6 +98,10 @@ export default function MouseImageGallery() {
         <div className="flex gap-10">
           <Link href="/match" className="z-[100]">
             <LikeIcon color="#000" />
+          </Link>
+
+          <Link href="/mypage" className="flex gap-10 z-[100]">
+            <Mypage />
           </Link>
 
           <Link href="/write" className="flex gap-10 z-[100]">

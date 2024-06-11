@@ -15,3 +15,4 @@ export { default as PaginationLeft } from './PaginationLeft';
 export { default as PaginationRight } from './PaginationRight';
 export { default as UpArrow } from './UpArrow';
 export { default as DownArrow } from './DownArrow';
+export { default as Mypage } from './Mypage';
