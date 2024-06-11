@@ -31,6 +31,12 @@ export default function useWritePost() {
         return;
       }
 
+      // eslint-disable-next-line
+      const parsedContent = JSON.parse(content) as any[];
+      const photoUrls = parsedContent
+        .filter(({ type }) => type === 'image')
+        .map(({ props: { url } }) => url);
+
       mutate({
         title,
         content,
@@ -42,6 +48,7 @@ export default function useWritePost() {
           url: sticker.src,
           stickerId: sticker.id,
         })),
+        photoUrls,
         ...otherProps,
       });
     },
