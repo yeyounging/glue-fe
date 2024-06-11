@@ -32,6 +32,7 @@ export default function BoardContent({
           >
             <div className="absolute w-150 h-150">
               <Image
+                loader={() => photoUrl || '/tempImage/4.jpg'}
                 src={photoUrl || '/tempImage/4.jpg'}
                 alt={String(postId)}
                 layout="fill"

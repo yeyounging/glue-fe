@@ -18,7 +18,7 @@ export default function Page({
   params: { postId: string };
 }) {
   const {
-    postDetail: { content },
+    postDetail: { content, postHashtags },
   } = usePostDetailContext();
 
   return (
@@ -28,6 +28,15 @@ export default function Page({
       <StickerRenderer />
 
       <Editor editable={false} initialData={content} className="min-h-500" />
+
+      <div className="mx-45 flex gap-10 mt-130">
+        {postHashtags.map((hashtag, index) => (
+          // eslint-disable-next-line
+          <div key={index} className="text-[#999]">
+            #{hashtag}
+          </div>
+        ))}
+      </div>
 
       <CommentsWrapper postId={postId} />
     </>

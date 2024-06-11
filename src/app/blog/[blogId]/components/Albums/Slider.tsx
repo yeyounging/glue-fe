@@ -19,6 +19,7 @@ export default function Slider({ photos }: { photos: string[] }) {
           <div key={photo} className="relative flex-none w-1/5 h-200">
             <div className="w-full h-full">
               <Image
+                loader={() => photo || temp}
                 alt="photo"
                 src={photo || temp}
                 layout="fill"

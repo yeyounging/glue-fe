@@ -12,6 +12,7 @@ export default function BlogBackground() {
     <div className="relative w-full h-screen">
       <div className="relative w-full h-full group">
         <Image
+          loader={() => background}
           src={background}
           alt="background"
           layout="fill"

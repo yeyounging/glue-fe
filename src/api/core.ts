@@ -24,10 +24,7 @@ axiosInstance.interceptors.request.use(
     if (!accessToken) {
       return config;
     }
-    config.headers.set(
-      'Authorization',
-      `Bearer ${process.env.NEXT_PUBLIC_MASTER_TOKEN}`,
-    );
+    config.headers.set('Authorization', `Bearer ${accessToken}`);
     return config;
   },
   (error: AxiosError) => {

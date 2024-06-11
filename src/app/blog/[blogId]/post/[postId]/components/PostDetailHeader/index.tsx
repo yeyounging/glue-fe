@@ -11,11 +11,11 @@ import { useDeletePosting } from './api/quries';
 
 export default function PostDetailHeader({ postId }: { postId: string }) {
   const {
-    postDetail: { title, createdAt, memberId },
+    postDetail: { title, createdAt, memberId, nickname },
     loginMemberId,
   } = usePostDetailContext();
   const { follow, handleFollow } = useFollow(Number(postId));
-  const name = '김성민';
+
   const port = usePortal({ id: 'edit-container' });
   const { mutate } = useDeletePosting();
 
@@ -58,7 +58,7 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
             {/* TODO: Image fedch */}
             <div className="w-30 h-30 rounded-full bg-primary" />
 
-            <p>{name}</p>
+            <p>{nickname}</p>
             <p className="text-[#BABABA]">{formatDate(createdAt)}</p>
           </div>
 

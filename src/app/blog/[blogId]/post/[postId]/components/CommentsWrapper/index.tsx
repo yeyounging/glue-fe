@@ -12,7 +12,7 @@ export default function CommentsWrapper({ postId }: { postId: string }) {
   const { handleLike, likeCount, like = 0 } = useLike(Number(postId));
 
   return (
-    <div className="w-[530px] mt-130 mb-[30vh] mx-auto">
+    <div className="w-[530px] mt-10 mb-[30vh] mx-auto">
       <div className="flex justify-between items-center pb-13 border-b-1 border-[#E0E0E0]">
         <p className="flex items-center text-33 font-bold">댓글</p>
 

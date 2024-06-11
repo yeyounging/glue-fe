@@ -22,6 +22,7 @@ export default function Page() {
               <Card width="w-190" height="h-247">
                 <Card.Image>
                   <Image
+                    loader={() => profile}
                     src={profile}
                     fill
                     objectFit="contain"

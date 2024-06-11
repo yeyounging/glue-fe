@@ -33,6 +33,7 @@ export default function FeedBox({
       </div>
       <div className="relative w-250 h-170 p-30 mt-10 border border-[#bcbcbc] rounded-4">
         <Image
+          loader={() => photo || fallbackImage}
           src={photo || fallbackImage}
           alt="image"
           layout="fill"

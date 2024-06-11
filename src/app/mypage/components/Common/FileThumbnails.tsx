@@ -40,6 +40,7 @@ export default function FileThumbnails({
           )}
         >
           <Image
+            loader={() => preview}
             src={preview}
             alt="Selected Image"
             layout="fill"

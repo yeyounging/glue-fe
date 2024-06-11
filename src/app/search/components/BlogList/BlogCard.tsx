@@ -21,6 +21,7 @@ export default function BlogCard({
     >
       <div className="relative w-250 h-130">
         <Image
+          loader={() => photoUrl}
           src={photoUrl}
           alt="bg"
           layout="fill"

@@ -16,7 +16,13 @@ export default function ProfileBox() {
   return (
     <section className="flex flex-col  items-center mr-50">
       <div className="relative w-250 h-300 my-10 ">
-        <Image src={profile} alt="profile" layout="fill" objectFit="cover" />
+        <Image
+          loader={() => profile}
+          src={profile}
+          alt="profile"
+          layout="fill"
+          objectFit="cover"
+        />
       </div>
       <div className="text-xl text-center mt-10 ">{memberName}</div>
       <p className="w-200 h-3 bg-primary" />
