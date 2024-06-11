@@ -9,6 +9,7 @@ export default function StickerRenderer() {
   return postStickerItems.map(
     ({ xLocation, yLocation, scaleX, scaleY, rotation, stickerId, url }) => (
       <Image
+        loader={() => url}
         key={`${xLocation}${yLocation}${stickerId}`}
         src={url}
         width={60}
