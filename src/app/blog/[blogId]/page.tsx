@@ -1,7 +1,8 @@
 'use client';
 
 import { useState } from 'react';
-import { Button, DownArrow, HamburgerMenu } from '@/components/Common';
+import { Button, DownArrow, HamburgerMenu, Pencil } from '@/components/Common';
+import Link from 'next/link';
 import {
   Tags,
   Albums,
@@ -17,6 +18,7 @@ export default function Page() {
   const [showBoard, setShowBoard] = useState(false);
   const {
     blogInfo: { blogId },
+    loginBlogId,
   } = useBlogPageContext();
 
   return (
@@ -30,12 +32,21 @@ export default function Page() {
           </section>
           <section className="relative flex flex-col h-full w-full mr-50">
             <div className="absolute top-0 right-0 py-4">
-              <Button
-                className="bg-secondary"
-                onClick={() => setShowBoard((prev) => !prev)}
-              >
-                {showBoard ? <DownArrow /> : <HamburgerMenu />}
-              </Button>
+              <div className="flex flex-row gap-10 items-center">
+                {blogId === loginBlogId && (
+                  <Link href="/write">
+                    <Button className="bg-secondary">
+                      <Pencil className="w-20" />
+                    </Button>
+                  </Link>
+                )}
+                <Button
+                  className="bg-secondary"
+                  onClick={() => setShowBoard((prev) => !prev)}
+                >
+                  {showBoard ? <DownArrow /> : <HamburgerMenu />}
+                </Button>
+              </div>
             </div>
 
             {showBoard ? (
