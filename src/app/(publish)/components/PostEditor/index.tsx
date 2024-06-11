@@ -29,15 +29,14 @@ const Editor = dynamic(() => import('@/components/Common/Editor'), {
 
 interface PostEditorProp {
   postDetail?: Partial<PostDetailResponse['postDetail']>;
+  hashtagNames?: string[];
 }
 
-export default function PostEditor({ postDetail = {} }: PostEditorProp) {
-  const {
-    title = '',
-    categoryName = '카테고리 선택',
-    content,
-    hashtags: initialData = [],
-  } = postDetail;
+export default function PostEditor({
+  postDetail = {},
+  hashtagNames: initialData = [],
+}: PostEditorProp) {
+  const { title = '', categoryName = '카테고리 선택', content } = postDetail;
 
   const port = usePortal({ id: 'publish-container' });
 
