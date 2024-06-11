@@ -74,6 +74,7 @@ function Item({
         'p-0 w-full h-28 !rounded-0 bg-[white/0.85] text-[black] text-[16px]',
         className,
       )}
+      {...props}
     >
       {children}
     </Button>

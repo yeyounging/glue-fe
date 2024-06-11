@@ -129,7 +129,10 @@ export default function PostEditor({ postDetail = {} }: PostEditorProp) {
                     {categoryTitle}
                   </Dropdown.Item>
                   {index < CATEGORIES.length - 1 && (
-                    <div className="w-full h-1 bg-[#EBEBEB]" />
+                    <div
+                      key={categoryTitle}
+                      className="w-full h-1 bg-[#EBEBEB]"
+                    />
                   )}
                 </>
               ))}
