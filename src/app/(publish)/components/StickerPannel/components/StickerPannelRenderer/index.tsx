@@ -28,6 +28,7 @@ export default function StickerPannelRenderer({
       <div className="grid grid-cols-3 justify-items-center items-center gap-20 mt-20 overflow-scroll">
         {stickerImage.map(({ stickerId, url }) => (
           <Image
+            loader={() => url}
             key={`${stickerId}`}
             src={url}
             alt={`${stickerId}`}
