@@ -5,13 +5,14 @@ import { motion } from 'framer-motion';
 import { Button, Copy, Input } from '@/components/Common';
 import { formatDate } from '@/utils';
 import { usePortal } from '@/hooks';
+import Image from 'next/image';
 import { usePostDetailContext } from '../PostDetailFetcher/PostDetailContext';
 
 import { useHandlePostDetail } from './hooks';
 
 export default function PostDetailHeader({ postId }: { postId: string }) {
   const {
-    postDetail: { title, createdAt, memberId, nickname },
+    postDetail: { title, createdAt, memberId, nickname, profile },
     loginMemberId,
   } = usePostDetailContext();
 
@@ -50,7 +51,14 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
 
         <div className="flex items-center justify-between px-5 border-b-1 border-[#D3D2D1] py-10">
           <div className="flex items-center gap-13">
-            <div className="w-30 h-30 rounded-full bg-primary" />
+            <Image
+              loader={() => profile}
+              src={profile}
+              width={30}
+              height={30}
+              alt="profile alt"
+              className="rounded-full"
+            />
 
             <p>{nickname}</p>
             <p className="text-[#BABABA]">{formatDate(createdAt)}</p>
