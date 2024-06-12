@@ -5,8 +5,15 @@ import Image from 'next/image';
 import { Button } from '@/components/Common';
 import { generateId } from '@/utils';
 import { useSlider } from './useSlider';
+import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
-export default function Slider({ photos }: { photos: string[] }) {
+export default function Slider() {
+  const { postItems } = useBlogPageContext();
+
+  const photos = postItems.flatMap(({ photoUrl }) =>
+    photoUrl ? photoUrl.filter(Boolean) : [],
+  );
+
   const { currentIndex, nextSlide, prevSlide } = useSlider(photos.length);
   const photoCount = photos.length;
   const slideWidth = 100 / photoCount;
@@ -30,11 +37,13 @@ export default function Slider({ photos }: { photos: string[] }) {
                 src={photo}
                 layout="fill"
                 objectFit="cover"
+                className="rounded-10"
               />
             </div>
           </div>
         ))}
       </div>
+
       {photoCount > 5 && (
         <div className="absolute inset-0 flex items-center justify-between px-4">
           <Button

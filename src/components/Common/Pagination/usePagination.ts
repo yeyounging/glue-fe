@@ -39,21 +39,23 @@ export function usePagination({ ...props }: UsePaginationProp) {
   const pageSize = 10;
   const Component = as || 'div';
 
-  const startPage = useMemo(
-    () => Math.floor((page - 1) / pageSize) * pageSize + 1,
-    [page, pageSize],
-  );
+  const startPage = useMemo(() => {
+    if (total <= 1) return 1;
+    return Math.floor((page - 1) / pageSize) * pageSize + 1;
+  }, [page, pageSize, total]);
 
-  const endPage = useMemo(
-    () => Math.min(startPage + pageSize - 1, total),
-    [total, pageSize, startPage],
-  );
+  const endPage = useMemo(() => {
+    if (total <= 1) return 1;
+    return Math.min(startPage + pageSize - 1, total);
+  }, [total, pageSize, startPage]);
 
-  const displayedPages = useMemo(
-    () =>
-      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i),
-    [startPage, endPage],
-  );
+  const displayedPages = useMemo(() => {
+    if (total <= 1) return [1];
+    return Array.from(
+      { length: endPage - startPage + 1 },
+      (_, i) => startPage + i,
+    );
+  }, [startPage, endPage, total]);
 
   const getBaseProps = useCallback(
     () => ({

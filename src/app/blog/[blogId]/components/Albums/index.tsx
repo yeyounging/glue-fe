@@ -1,23 +1,17 @@
 'use client';
 
-import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 import Slider from './Slider';
 
 export default function Albums() {
-  const { postItems } = useBlogPageContext();
-
-  const photos = postItems.flatMap(({ photo }) =>
-    photo ? photo.filter(Boolean) : [],
-  );
-
   return (
-    <article className="flex flex-col w-full gap-20 px-100 items-start">
+    <article className="flex flex-col w-full gap-20 px-100 items-start mt-30 overflow-scroll">
       <div className="flex flex-col  justify-center items-center">
         <div className="font-extrabold text-4xl">Albums</div>
         <p className="w-135 h-3 bg-primary mb-2" />
         <p className="w-145 h-3 bg-primary mb-2" />
       </div>
-      <Slider photos={photos} />
+
+      <Slider />
     </article>
   );
 }

@@ -3,8 +3,9 @@ import BlogCard from './BlogCard';
 import { useSearchContext } from '../SearchFetcher/SearchContext';
 
 export default function BlogList() {
-  const { blogInfoItem } = useSearchContext();
-  const { blogInfoList } = blogInfoItem;
+  const {
+    blogInfoItem: { blogInfoList },
+  } = useSearchContext();
 
   return (
     <div>
