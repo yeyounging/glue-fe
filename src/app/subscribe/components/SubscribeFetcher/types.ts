@@ -18,7 +18,7 @@ export interface FollowPostResponse extends PaginationInfo {
       blogId: number;
       postId: number;
       title: string;
-      preview: string;
+      profile: string;
       photo: string;
     };
   }>;

@@ -17,14 +17,14 @@ export default function FeedContent({
     <div>
       <div className="grid grid-cols-3 gap-40 py-50">
         {blogPostPreviews?.map(({ blogItem, postItem }) => {
-          const { postId, title, preview, photo } = postItem;
+          const { postId, title, profile } = postItem;
           return (
             <FeedBox
               postId={postId}
               key={postId}
               title={title}
-              preview={preview}
-              photo={photo}
+              preview={profile}
+              photo={blogItem.profile}
               blogItem={blogItem}
             />
           );

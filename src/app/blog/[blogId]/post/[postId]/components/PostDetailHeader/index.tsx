@@ -50,7 +50,7 @@ export default function PostDetailHeader({ postId }: { postId: string }) {
         />
 
         <div className="flex items-center justify-between px-5 border-b-1 border-[#D3D2D1] py-10">
-          <div className="flex items-center gap-13">
+          <div className="flex items-center gap-13 relative">
             <Image
               loader={() => profile}
               src={profile}
