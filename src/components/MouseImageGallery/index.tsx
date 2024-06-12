@@ -103,7 +103,11 @@ export default function MouseImageGallery() {
             <LikeIcon color="#000" />
           </Link>
 
-          <Link href={`/blog/${blogId}`} className="flex gap-10 z-[100]">
+          <Link
+            href={`/blog/${blogId}`}
+            className="flex gap-10 z-[100]"
+            prefetch={false}
+          >
             <Mypage />
           </Link>
 
