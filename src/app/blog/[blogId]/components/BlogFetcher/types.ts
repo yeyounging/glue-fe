@@ -15,7 +15,7 @@ export interface BlogPageInfo {
       postId: number;
       title: string;
       preview: string;
-      photo: string[];
+      photoUrl: string[];
     },
   ];
   hashtagNames: string[];

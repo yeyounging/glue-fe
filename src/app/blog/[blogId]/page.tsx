@@ -30,6 +30,7 @@ export default function Page() {
             <ProfileBox />
             <Tags />
           </section>
+
           <section className="relative flex flex-col h-full w-full mr-50">
             <div className="absolute top-0 right-0 py-4">
               <div className="flex flex-row gap-10 items-center">
@@ -40,6 +41,7 @@ export default function Page() {
                     </Button>
                   </Link>
                 )}
+
                 <Button
                   className="bg-secondary"
                   onClick={() => setShowBoard((prev) => !prev)}

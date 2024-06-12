@@ -3,12 +3,12 @@
 import { generateId } from '@/utils';
 import { useBlogPageContext } from '../BlogFetcher/BlogContext';
 
-export function Story({ title, content }: { title: string; content: string }) {
+export function Story({ title, preview }: { title: string; preview: string }) {
   return (
     <div className="h-140">
       <div className="h-30 text-xl font-bold ">{title}</div>
       <div className="my-5 h-100 white-space:normal break-words text-overflow">
-        {content}
+        {preview}
       </div>
     </div>
   );
@@ -26,9 +26,10 @@ export default function StoryBox() {
           <p className="w-140 h-3 bg-primary mb-2" />
         </div>
       </header>
+
       <article className="w-full grid grid-cols-2 gap-30 mt-40">
-        {postItems.map(({ preview, title }) => (
-          <Story key={generateId()} title={title} content={preview} />
+        {postItems.map((postItem) => (
+          <Story key={generateId()} {...postItem} />
         ))}
       </article>
     </section>
