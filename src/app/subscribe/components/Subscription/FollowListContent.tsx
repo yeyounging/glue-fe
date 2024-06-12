@@ -20,6 +20,7 @@ export default function FollowListContent({
       <div className="flex flex-col gap-5">
         {blogItems?.map(({ blogId, nickname, title, profile }) => (
           <ProfileCard
+            blogId={blogId}
             key={blogId}
             name={nickname}
             title={title}

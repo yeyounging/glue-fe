@@ -20,6 +20,7 @@ export default function FeedContent({
           const { postId, title, preview, photo } = postItem;
           return (
             <FeedBox
+              postId={postId}
               key={postId}
               title={title}
               preview={preview}
