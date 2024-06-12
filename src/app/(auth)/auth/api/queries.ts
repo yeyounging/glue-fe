@@ -1,4 +1,3 @@
-import { getQueryClient } from '@/app/lib';
 import { useMutation } from '@tanstack/react-query';
 import { ACCESS_TOKEN } from '@/constants';
 import Cookies from 'js-cookie';
@@ -15,7 +14,6 @@ export const usePostLogin = (code: string) => {
     onSuccess: ({ result: { accessToken, blogId } }) => {
       Cookies.set(ACCESS_TOKEN, accessToken);
       setLoginId(blogId);
-      getQueryClient().invalidateQueries({ queryKey: ['login'] });
     },
   });
 };
