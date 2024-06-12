@@ -27,6 +27,7 @@ export interface PostDetailResponse {
     categoryName: string;
 
     photoUrls: string[];
+    profile: string;
 
     postStickerItems: Sticker[];
     postHashtags: string[];
