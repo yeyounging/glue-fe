@@ -4,15 +4,10 @@ import { StrictPropsWithChildren } from '@/types';
 import { useMyPageInfo } from './queries';
 import { MyPageProviderWrapper } from './MyPageContext/MyPageProviderWrapper';
 
-export default function MyPageFetcher({
-  children,
-  blogId,
-}: StrictPropsWithChildren & { blogId: number }) {
-  const { data } = useMyPageInfo(blogId);
+export default function MyPageFetcher({ children }: StrictPropsWithChildren) {
+  const { data } = useMyPageInfo();
 
   return (
-    <MyPageProviderWrapper initialData={data} blogId={blogId}>
-      {children}
-    </MyPageProviderWrapper>
+    <MyPageProviderWrapper initialData={data}>{children}</MyPageProviderWrapper>
   );
 }
