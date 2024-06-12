@@ -15,7 +15,7 @@ export default function BoardContent({
   const { postItems, totalPage } = useBoardContext();
 
   return (
-    <div className="px-100">
+    <div className="px-100 py-20">
       <header className="flex flex-row items-center justify-between w-full pr-10">
         <div className="flex flex-col justify-center items-center">
           <div className="font-extrabold text-4xl">Stories</div>

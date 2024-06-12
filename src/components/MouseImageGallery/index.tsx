@@ -4,6 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { MouseEvent, useRef } from 'react';
 import { range } from '@/utils';
+import Cookies from 'js-cookie';
+import { BLOG_ID } from '@/constants';
 import { LikeIcon, Mypage, Trending, Write } from '../Common';
 
 export default function MouseImageGallery() {
@@ -13,6 +15,7 @@ export default function MouseImageGallery() {
   const maxNumberOfImages = 10;
   // eslint-disable-next-line
   const refs: any[] = [];
+  const blogId = Cookies.get(BLOG_ID) as string;
 
   const getCurrentImages = () => {
     const images = [];
@@ -100,7 +103,7 @@ export default function MouseImageGallery() {
             <LikeIcon color="#000" />
           </Link>
 
-          <Link href="/mypage" className="flex gap-10 z-[100]">
+          <Link href={`/blog/${blogId}`} className="flex gap-10 z-[100]">
             <Mypage />
           </Link>
 
