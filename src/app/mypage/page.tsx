@@ -1,6 +1,5 @@
 'use client';
 
-import { useUserContext } from '@/components/Common';
 import { AsyncBoundaryWithQuery } from '@/react-utils';
 import Profile from './components/Profile';
 import Title from './components/Title';
@@ -10,13 +9,11 @@ import MyPageFallback from './components/MyPageFallback';
 import MyPageFetcher from './components/MyPageFetcher';
 
 export default function Page() {
-  const { loginId } = useUserContext();
-
   return (
     <div>
       <AsyncBoundaryWithQuery pendingFallback={<div>loading 중..</div>}>
         <MyPageFallback>
-          <MyPageFetcher blogId={loginId}>
+          <MyPageFetcher>
             <Title />
             <section className="flex flex-col items-center py-400">
               <div className="h-1 w-500 bg-[#979696]" />

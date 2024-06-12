@@ -1,19 +1,16 @@
 import { useMutation } from '@tanstack/react-query';
-import { ACCESS_TOKEN } from '@/constants';
+import { ACCESS_TOKEN, BLOG_ID } from '@/constants';
 import Cookies from 'js-cookie';
-import { useUserContext } from '@/components/Common';
 import { postLogin } from '.';
 
 export const usePostLogin = (code: string) => {
-  const { setLoginId } = useUserContext();
-
   return useMutation({
     mutationKey: ['login'],
     mutationFn: () => postLogin({ code }),
 
     onSuccess: ({ result: { accessToken, blogId } }) => {
       Cookies.set(ACCESS_TOKEN, accessToken);
-      setLoginId(blogId);
+      Cookies.set(BLOG_ID, String(blogId));
     },
   });
 };

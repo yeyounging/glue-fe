@@ -13,3 +13,4 @@ export const HTTP_METHODS: Record<
 
 export const ACCESS_TOKEN = 'accessToken' as const;
 export const REFRESH_TOKEN = 'refreshToken' as const;
+export const BLOG_ID = 'blogId' as const;

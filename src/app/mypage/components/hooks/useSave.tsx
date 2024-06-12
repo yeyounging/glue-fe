@@ -4,8 +4,8 @@ import { usePatchMyPage, usePostImage } from '../MyPageFetcher/queries';
 import { useMyPageContext } from '../MyPageFetcher/MyPageContext';
 
 export default function useSave() {
-  const { myPageData, setMyPageData, blogId } = useMyPageContext();
-  const { mutate } = usePatchMyPage(blogId);
+  const { myPageData, setMyPageData } = useMyPageContext();
+  const { mutate } = usePatchMyPage();
   const { mutateAsync } = usePostImage();
   const { handleError } = useToastContext();
 
